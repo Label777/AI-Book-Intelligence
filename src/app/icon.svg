@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <style>
+    .b { fill: #1f7a5a } .a { fill: #6b4bd8 } .r { fill: #9a5208 } .c { fill: #b3344a }
+    @media (prefers-color-scheme: dark) {
+      .b { fill: #5fd3a6 } .a { fill: #b39dff } .r { fill: #f2b25c } .c { fill: #ff8fa3 }
+    }
+  </style>
+  <circle class="b" cx="6.5" cy="6.5" r="4.5"/>
+  <path class="a" d="M17.5 1.5 22.5 6.5 17.5 11.5 12.5 6.5Z"/>
+  <path class="r" d="M6.5 13 11.5 22H1.5Z"/>
+  <rect class="c" x="13.5" y="13.5" width="8" height="8"/>
+</svg>

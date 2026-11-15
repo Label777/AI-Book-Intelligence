@@ -1,0 +1,36 @@
+/*
+ * Дизайн-токены из docs/02-ux-ui.md, раздел 7.
+ * Каждое цветовое значение — пара light-dark(светлая, тёмная).
+ * Тема следует системной настройке, пока пользователь не выбрал её сам:
+ * тогда на <html> появляется data-theme="light" или "dark".
+ * Контраст пар проверяется тестом tests/unit/tokens.test.ts.
+ */
+:root {
+  color-scheme: light dark;
+
+  --bg: light-dark(#fafaf7, #0e0e10);
+  --surface: light-dark(#ffffff, #17171a);
+  --surface-2: light-dark(#f2f1ec, #1f1f23);
+  --border: light-dark(#e4e2da, #2a2a30);
+  --border-strong: light-dark(#85837a, #7b7a85);
+  --text: light-dark(#16161a, #f2f2ee);
+  --text-2: light-dark(#5c5b63, #a3a2ab);
+  --accent: light-dark(#3b4edb, #8b9bff);
+  --on-accent: light-dark(#ffffff, #0e0e10);
+
+  --src-book: light-dark(#1f7a5a, #5fd3a6);
+  --src-ai: light-dark(#6b4bd8, #b39dff);
+  --src-research: light-dark(#9a5208, #f2b25c);
+  --src-critique: light-dark(#b3344a, #ff8fa3);
+
+  /* Тень только в светлой теме; в тёмной её роль играет граница. */
+  --shadow-color: light-dark(rgb(22 22 26 / 0.08), transparent);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
