@@ -1,0 +1,55 @@
+{
+  "links": {
+    "self": "/works/OL17075811W/editions.json?limit=100",
+    "work": "/works/OL17075811W"
+  },
+  "size": 86,
+  "entries": [
+    {
+      "key": "/books/OL40000001M",
+      "title": "Sapiens",
+      "publishers": ["Debolsillo"],
+      "publish_date": "2022",
+      "isbn_13": ["9788466361903"],
+      "works": [{ "key": "/works/OL17075811W" }]
+    },
+    {
+      "key": "/books/OL40000002M",
+      "title": "Sapiens. Una historia gráfica",
+      "publishers": ["Random House Español"],
+      "publish_date": "2024",
+      "languages": [{ "key": "/languages/spa" }],
+      "number_of_pages": 280,
+      "isbn_13": ["9788419951182"]
+    },
+    {
+      "key": "/books/OL40000003M",
+      "title": "Sapiens: A Graphic History, Volume 3",
+      "publishers": ["Vintage Publishing"],
+      "publish_date": "2024",
+      "languages": [{ "key": "/languages/eng" }],
+      "number_of_pages": 256,
+      "isbn_13": ["9781911717263"]
+    },
+    {
+      "key": "/books/OL40000004M",
+      "title": "Sapiens",
+      "subtitle": "A Brief History of Humankind",
+      "publishers": ["Harper"],
+      "publish_date": "February 10, 2015",
+      "languages": [{ "key": "/languages/eng" }],
+      "number_of_pages": 443,
+      "isbn_10": ["0062316095"],
+      "covers": [8634250]
+    },
+    {
+      "key": "/books/OL40000005M",
+      "title": "Sapiens. Краткая история человечества",
+      "publishers": ["Синдбад"],
+      "publish_date": "2016",
+      "languages": [{ "key": "/languages/rus" }],
+      "number_of_pages": 520
+    },
+    { "key": "/books/OL40000006M", "publishers": ["Без названия"] }
+  ]
+}

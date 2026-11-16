@@ -25,3 +25,4 @@ blob-report/
 *.log
 *.pem
 .vercel/
+search-eval.json

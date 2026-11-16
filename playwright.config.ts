@@ -2,6 +2,8 @@ import { defineConfig, devices } from "@playwright/test";
 
 const PORT = Number(process.env.PORT ?? 3100);
 const baseURL = `http://127.0.0.1:${PORT}`;
+const MOCK_PORT = Number(process.env.MOCK_CATALOG_PORT ?? 3101);
+const MOCK_CATALOG = `http://127.0.0.1:${MOCK_PORT}`;
 
 // Локально можно указать уже установленный браузер:
 // PW_CHROME_PATH=/usr/bin/google-chrome npm run test:e2e
@@ -25,10 +27,21 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], launchOptions: { executablePath } },
     },
   ],
-  webServer: {
-    command: `npm run start -- --port ${PORT}`,
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-    timeout: 60_000,
-  },
+  // Приложение в тестах ходит не в настоящий каталог, а в локальную заглушку с записанными ответами.
+  webServer: [
+    {
+      command: "node tests/e2e/mock-catalog.mjs",
+      url: `${MOCK_CATALOG}/__health`,
+      env: { MOCK_CATALOG_PORT: String(MOCK_PORT) },
+      reuseExistingServer: !process.env.CI,
+      timeout: 15_000,
+    },
+    {
+      command: `npm run start -- --port ${PORT}`,
+      url: baseURL,
+      env: { OPEN_LIBRARY_BASE_URL: MOCK_CATALOG, GOOGLE_BOOKS_BASE_URL: MOCK_CATALOG },
+      reuseExistingServer: !process.env.CI,
+      timeout: 60_000,
+    },
+  ],
 });

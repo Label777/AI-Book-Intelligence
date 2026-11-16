@@ -1,0 +1,48 @@
+name: Проверка поиска
+
+# Живая проверка на контрольном наборе запросов против настоящего Open Library.
+# Запускается вручную и при изменении кода поиска — не на каждую отправку, чтобы не нагружать каталог.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/books/**"
+      - "tests/eval/**"
+      - "scripts/report-search-eval.mjs"
+      - ".github/workflows/search-eval.yml"
+
+concurrency:
+  group: search-eval-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    name: 50 контрольных запросов
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Поиск по контрольному набору
+        id: eval
+        continue-on-error: true
+        run: npm run eval:search
+      - name: Итог
+        if: always()
+        run: node scripts/report-search-eval.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: search-eval
+          path: search-eval.json
+          retention-days: 30
+      - name: Критерий 90 %
+        if: steps.eval.outcome != 'success'
+        run: exit 1

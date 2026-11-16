@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BookCover } from "@/components/ui/book-cover";
 import { cn } from "@/lib/cn";
 import { plural } from "@/lib/plural";
 
@@ -12,6 +13,8 @@ export interface BookCardProps {
   /** Обложка издания. Если её нет, показывается типографическая обложка. */
   coverUrl?: string;
   editionCount?: number;
+  /** Уровень заголовка: h3 в списке, h2 — когда карточка стоит отдельно. */
+  headingLevel?: "h2" | "h3";
   className?: string;
 }
 
@@ -23,6 +26,7 @@ export function BookCard({
   year,
   coverUrl,
   editionCount,
+  headingLevel: Heading = "h3",
   className,
 }: BookCardProps) {
   const authorLine = authors.join(", ");
@@ -41,37 +45,11 @@ export function BookCard({
         className,
       )}
     >
-      <div className="aspect-[2/3] w-20 shrink-0 overflow-hidden rounded-control bg-surface-2">
-        {coverUrl ? (
-          // Обложки приходят с внешних каталогов; оптимизация изображений настраивается на этапе 5.
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={coverUrl}
-            alt=""
-            loading="lazy"
-            decoding="async"
-            className="size-full object-cover"
-          />
-        ) : (
-          // Типографическая обложка: не имитирует официальную.
-          <div
-            aria-hidden="true"
-            data-cover="typographic"
-            className="flex size-full flex-col justify-between border-l-4 border-accent p-2"
-          >
-            <span className="line-clamp-4 font-serif text-[0.6875rem] leading-tight font-semibold wrap-anywhere text-ink">
-              {title}
-            </span>
-            <span className="line-clamp-2 text-[0.5625rem] leading-tight text-ink-2">
-              {authorLine}
-            </span>
-          </div>
-        )}
-      </div>
+      <BookCover title={title} authors={authors} coverUrl={coverUrl} className="w-20" />
       <div className="flex min-w-0 flex-1 flex-col gap-1 py-1">
-        <h3 className="line-clamp-2 font-serif text-lg leading-snug font-semibold text-ink group-hover:text-accent">
+        <Heading className="line-clamp-2 font-serif text-lg leading-snug font-semibold text-ink group-hover:text-accent">
           {title}
-        </h3>
+        </Heading>
         {authorLine ? (
           <p className="line-clamp-1 text-sm text-ink-2">{authorLine}</p>
         ) : null}

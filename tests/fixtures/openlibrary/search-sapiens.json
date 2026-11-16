@@ -1,0 +1,45 @@
+{
+  "numFound": 4,
+  "start": 0,
+  "numFoundExact": true,
+  "docs": [
+    {
+      "key": "/works/OL17075811W",
+      "title": "Sapiens",
+      "subtitle": "A Brief History of Humankind",
+      "author_name": ["Yuval Noah Harari"],
+      "first_publish_year": 2011,
+      "edition_count": 86,
+      "cover_i": 8634250,
+      "language": ["eng", "spa", "rus", "ger", "fre"]
+    },
+    {
+      "key": "/works/OL20000001W",
+      "title": "Summary of Sapiens by Yuval Noah Harari",
+      "author_name": ["QuickRead Press"],
+      "first_publish_year": 2019,
+      "edition_count": 3,
+      "language": ["eng"]
+    },
+    {
+      "key": "/works/OL20000002W",
+      "title": "Sapiens",
+      "author_name": ["Harari, Yuval Noah"],
+      "first_publish_year": 2015,
+      "edition_count": 2,
+      "language": ["eng"]
+    },
+    {
+      "key": "/works/OL20000003W",
+      "title": "Sapiens: A Graphic History",
+      "subtitle": "The Birth of Humankind",
+      "author_name": ["Yuval Noah Harari", "David Vandermeulen", "Daniel Casanave"],
+      "first_publish_year": 2020,
+      "edition_count": 14,
+      "cover_i": 10254953,
+      "language": ["eng", "fre"]
+    }
+  ],
+  "q": "sapiens harari",
+  "offset": null
+}

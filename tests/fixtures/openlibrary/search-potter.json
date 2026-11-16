@@ -1,0 +1,17 @@
+{
+  "numFound": 1,
+  "start": 0,
+  "numFoundExact": true,
+  "docs": [
+    {
+      "key": "/works/OL82563W",
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author_name": ["J. K. Rowling"],
+      "first_publish_year": 1997,
+      "edition_count": 350,
+      "cover_i": 10521270,
+      "language": ["eng", "rus", "spa"]
+    }
+  ],
+  "q": "Harry Potter and the Philosopher's Stone J K Rowling"
+}
