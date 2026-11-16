@@ -18,7 +18,11 @@ function matches(candidate: RankedCandidate, testCase: EvalCase): boolean {
         tokensMatch(testCase.title, token) ||
         (testCase.titleEn !== undefined && tokensMatch(testCase.titleEn, token)),
     ) &&
-    authorTokens.some((token) => tokensMatch(testCase.author, token))
+    authorTokens.some(
+      (token) =>
+        tokensMatch(testCase.author, token) ||
+        (testCase.authorEn !== undefined && tokensMatch(testCase.authorEn, token)),
+    )
   );
 }
 

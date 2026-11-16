@@ -12,6 +12,8 @@ export interface EvalCase {
   titleEn?: string;
   /** Фамилия автора. */
   author: string;
+  /** Фамилия латиницей — если транслитерация её не даёт (Клир → Clear). */
+  authorEn?: string;
 }
 
 export const EVAL_CASES: EvalCase[] = [
@@ -229,6 +231,7 @@ export const EVAL_CASES: EvalCase[] = [
     title: "привычки",
     titleEn: "habits",
     author: "клир",
+    authorEn: "clear",
   },
   {
     kind: "кириллица",
