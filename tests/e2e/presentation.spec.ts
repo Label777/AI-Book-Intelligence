@@ -232,9 +232,9 @@ test.describe("телефон", () => {
   test("области нажатия не меньше 44 px", async ({ page }) => {
     await page.goto(DEMO);
     await expect(page.locator("[data-slide]")).toHaveCount(15);
-    const targets = page.locator("main button:visible, main a:visible");
+    const targets = page.locator("#main").locator("button, a").filter({ visible: true });
+    await expect.poll(() => targets.count()).toBeGreaterThan(50);
     const count = await targets.count();
-    expect(count).toBeGreaterThan(50);
     for (let index = 0; index < count; index += 3) {
       const box = await targets.nth(index).boundingBox();
       expect(
