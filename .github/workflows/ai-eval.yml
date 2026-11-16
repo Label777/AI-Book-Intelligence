@@ -1,0 +1,98 @@
+name: Прогон AI-движка
+
+# Прогон контрольных книг на настоящей модели. Тратит токены, поэтому запускается только
+# вручную или изменением файла evals/request.json в ветке main.
+# Нужен секрет репозитория ANTHROPIC_API_KEY; без него прогон пропускается.
+on:
+  workflow_dispatch:
+    inputs:
+      books:
+        description: "Книги из evals/books.json через запятую (пусто — из evals/request.json)"
+        required: false
+        default: ""
+  push:
+    branches: [main]
+    paths:
+      - "evals/request.json"
+
+concurrency:
+  group: ai-eval
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  eval:
+    name: Контрольные книги
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      BOOKS_INPUT: ${{ inputs.books }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверка ключа
+        id: key
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::warning title=Прогон AI-движка::Секрет ANTHROPIC_API_KEY не задан — прогон пропущен. Добавьте его: Settings → Secrets and variables → Actions."
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.key.outputs.present == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+        if: steps.key.outputs.present == 'true'
+
+      # Результаты прошлых прогонов: готовые шаги не выполняются и не оплачиваются заново.
+      - name: Прошлые результаты
+        if: steps.key.outputs.present == 'true'
+        run: |
+          if git fetch --depth=1 origin eval-results 2>/dev/null; then
+            mkdir -p evals/out
+            git archive FETCH_HEAD | tar -x -C evals/out
+            rm -f evals/out/summary.json
+          fi
+
+      - name: Прогон
+        if: steps.key.outputs.present == 'true'
+        id: run
+        continue-on-error: true
+        run: |
+          if [ -n "$BOOKS_INPUT" ]; then
+            export EVAL_BOOKS="$BOOKS_INPUT"
+          else
+            export EVAL_BOOKS="$(node -p "require('./evals/request.json').books.join(',')")"
+          fi
+          export EVAL_LANGUAGE="$(node -p "require('./evals/request.json').language")"
+          echo "Книги: $EVAL_BOOKS, язык: $EVAL_LANGUAGE"
+          npm run eval
+
+      - name: Итог
+        if: steps.key.outputs.present == 'true'
+        run: node scripts/report-ai-eval.mjs
+
+      # Результаты шагов сохраняются в отдельной ветке: их можно прочитать и продолжить прогон.
+      - name: Сохранение результатов
+        if: steps.key.outputs.present == 'true'
+        run: |
+          [ -d evals/out ] || exit 0
+          cd evals/out
+          git init -q -b eval-results
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Результаты прогона $GITHUB_SHA" || exit 0
+          git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" eval-results
+
+      - name: Статус прогона
+        if: steps.key.outputs.present == 'true' && steps.run.outcome != 'success'
+        run: exit 1

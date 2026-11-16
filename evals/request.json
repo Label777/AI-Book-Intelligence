@@ -1,0 +1,5 @@
+{
+  "books": ["thinking-fast-and-slow"],
+  "language": "ru",
+  "note": "Изменение этого файла в ветке main запускает прогон в GitHub Actions (.github/workflows/ai-eval.yml)."
+}

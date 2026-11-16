@@ -7,7 +7,7 @@
  * Результаты шагов сохраняются в evals/out/<книга>/ — прерванный прогон продолжается,
  * повторный запуск без изменений ничего не тратит.
  */
-import { readFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -45,6 +45,7 @@ describe.skipIf(!hasKey)("контрольные книги на настоящ�
 
       for (const { slug, ...book } of books) {
         const analysisId = `${slug}-${language}`;
+        const startedAt = Date.now();
         const result = await analyzeBook({
           analysisId,
           store,
@@ -70,7 +71,20 @@ describe.skipIf(!hasKey)("контрольные книги на настоящ�
           tocVerified: result.state.sources?.toc.verified,
           ...result.state.verified?.report,
           ...usage,
+          /** Время этого запуска; шаги, взятые из сохранённых результатов, в него не входят. */
+          seconds: Math.round((Date.now() - startedAt) / 1000),
+          model: {
+            fast: model.modelFor("fast"),
+            main: model.modelFor("main"),
+            deep: model.modelFor("deep"),
+          },
         });
+        // Итог пишем после каждой книги: если прогон оборвётся, готовое не пропадёт.
+        await mkdir(path.join(HERE, "out"), { recursive: true });
+        await writeFile(
+          path.join(HERE, "out", "summary.json"),
+          `${JSON.stringify(summary, null, 2)}\n`,
+        );
       }
       console.table(summary);
     },
