@@ -28,8 +28,8 @@ const book = {
 describe("searchVariants", () => {
   it("для длинного запроса пробует без последнего и без первого слова", () => {
     expect(searchVariants("Чёрный лебедь Талеб")).toEqual([
-      "черныи лебедь талеб",
-      "черныи лебедь",
+      "чёрный лебедь талеб",
+      "чёрный лебедь",
       "лебедь талеб",
     ]);
     expect(searchVariants("Атомные привычки")).toEqual(["атомные привычки"]);
@@ -62,7 +62,7 @@ describe("подсказка Wikidata", () => {
   it("если полный запрос не найден, пробует без имени автора", async () => {
     const { suggest, calls } = wikidata((params) => {
       if (params.get("action") === "wbsearchentities") {
-        return { search: params.get("search") === "черныи лебедь" ? [{ id: "Q1" }] : [] };
+        return { search: params.get("search") === "чёрный лебедь" ? [{ id: "Q1" }] : [] };
       }
       if (params.get("ids") === "Q1") return { entities: { Q1: book } };
       return { entities: {} };

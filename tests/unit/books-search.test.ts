@@ -35,14 +35,27 @@ describe("подготовка запроса", () => {
 
   it("relaxedQueries убирает по одному слову, начиная с длинных", () => {
     expect(relaxedQueries("outliers gladwel")).toEqual(["gladwel", "outliers"]);
-    expect(relaxedQueries("selfish gene dawkin")).toEqual([
-      "gene dawkin",
-      "selfish gene",
-      "selfish dawkin",
-    ]);
     expect(relaxedQueries("the lean statup")).toEqual(["lean", "statup"]);
     expect(relaxedQueries("sapiens")).toEqual([]);
     expect(relaxedQueries("a b c d e")).toHaveLength(3);
+  });
+
+  it("relaxedQueries первым убирает слово, которого нет в лучшем результате", () => {
+    const known = ["dawkins", "selfish", "gene"];
+    expect(relaxedQueries("selfish gene dawkin", known)).toEqual([
+      "selfish gene",
+      "gene dawkin",
+      "selfish dawkin",
+    ]);
+  });
+
+  it("запросы в каталог сохраняют исходное написание слов", () => {
+    expect(relaxedQueries("Чёрный лебедь Талеб")).toEqual([
+      "лебедь талеб",
+      "чёрный талеб",
+      "чёрный лебедь",
+    ]);
+    expect(fuzzyQuery("Богатый папа")).toBe("богатый~ папа~");
   });
 
   it("searchPath кодирует запрос и просит название на нужном языке", () => {
@@ -83,7 +96,8 @@ describe("searchBooks", () => {
     const suggest = vi.fn();
     const outcome = await searchBooks("sapeins harari", { client, suggest, cache: null });
 
-    expect(paths.map(queryOf)).toEqual(["sapeins harari", "harari"]);
+    // Сначала убираем слово, которого нет ни в одном результате, затем остальные.
+    expect(paths.map(queryOf)).toEqual(["sapeins harari", "harari", "sapeins"]);
     expect(new URL(paths[1], "https://e.org").searchParams.get("limit")).toBe("50");
     expect(outcome.strategy).toBe("fuzzy");
     expect(outcome.candidates[0].workId).toBe("OL17075811W");

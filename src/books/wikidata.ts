@@ -1,5 +1,5 @@
 import type { SuggestTitle, TitleSuggestion } from "@/books/google-books";
-import { hasCyrillic, normalizeText } from "@/books/text";
+import { hasCyrillic } from "@/books/text";
 
 /**
  * Wikidata как переводчик названий: в Open Library мало русских изданий, и запрос
@@ -22,7 +22,13 @@ const isObject = (value: unknown): value is Json =>
 
 /** Запрос и его укороченные варианты: «Чёрный лебедь Талеб» → без последнего слова → без первого. */
 export function searchVariants(query: string): string[] {
-  const words = normalizeText(query).split(" ").filter(Boolean);
+  // Слова в исходном написании: поиск Wikidata различает «й» и «и».
+  const words = query
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\p{M}]+/gu, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
   const variants = [words.join(" ")];
   if (words.length >= 3) {
     variants.push(words.slice(0, -1).join(" "), words.slice(1).join(" "));

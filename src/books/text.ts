@@ -20,6 +20,21 @@ export function tokenize(value: string): string[] {
   return meaningful.length > 0 ? meaningful : all;
 }
 
+/**
+ * Слова запроса в исходном написании — для отправки во внешние каталоги.
+ * normalizeText здесь не годится: он превращает «й» в «и», и каталог перестаёт узнавать слово.
+ */
+export function queryWords(value: string): string[] {
+  const all = value
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\p{M}]+/gu, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
+  const meaningful = all.filter((word) => !STOP_WORDS.has(word));
+  return meaningful.length > 0 ? meaningful : all;
+}
+
 export function hasCyrillic(value: string): boolean {
   return /\p{Script=Cyrillic}/u.test(value);
 }
@@ -124,12 +139,22 @@ export function tokensMatch(a: string, b: string): boolean {
   return false;
 }
 
+/** Совпадают ли два слова буква в букву (с учётом разных алфавитов, но без опечаток). */
+export function tokensEqual(a: string, b: string): boolean {
+  const formsB = tokenForms(b);
+  return tokenForms(a).some((form) => formsB.includes(form));
+}
+
 /** Доля слов из needles, для которых нашлось совпадение в haystack (0–1). */
-export function coverage(needles: string[], haystack: string[]): number {
+export function coverage(
+  needles: string[],
+  haystack: string[],
+  match: (a: string, b: string) => boolean = tokensMatch,
+): number {
   if (needles.length === 0) return 0;
   let found = 0;
   for (const needle of needles) {
-    if (haystack.some((candidate) => tokensMatch(needle, candidate))) found += 1;
+    if (haystack.some((candidate) => match(needle, candidate))) found += 1;
   }
   return found / needles.length;
 }

@@ -17,6 +17,8 @@ export interface RankedCandidate extends BookCandidate {
   score: number;
   /** Какая доля слов запроса нашлась в названии и авторах, 0–1. */
   matched: number;
+  /** То же, но без скидки на опечатки: 1 — все слова запроса найдены буква в букву. */
+  matchedExactly: number;
 }
 
 export type Confidence = "high" | "medium" | "low";
