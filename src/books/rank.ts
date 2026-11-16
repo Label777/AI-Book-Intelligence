@@ -1,4 +1,4 @@
-import { coverage, normalizeText, tokenize } from "@/books/text";
+import { coverage, normalizeText, tokenize, tokensEqual } from "@/books/text";
 import type { BookCandidate, Confidence, RankedCandidate } from "@/books/types";
 
 /** Пересказы, конспекты и рабочие тетради по чужой книге: в каталоге их много, а ищут обычно оригинал. */
@@ -10,6 +10,7 @@ const DERIVATIVE_MARKERS = [
   "study guide",
   "workbook",
   "key takeaways",
+  "key ideas",
   "key insights",
   "conversation starters",
   "book review",
@@ -60,6 +61,7 @@ function popularity(editionCount: number | undefined): number {
 interface Score {
   score: number;
   matched: number;
+  matchedExactly: number;
 }
 
 export function scoreCandidate(
@@ -89,7 +91,11 @@ export function scoreCandidate(
 
   // Пересказ опускаем, если искали не его; если искали именно пересказ — поднимаем.
   if (isDerivative(candidate.title)) score += isDerivative(query) ? 0.25 : -0.35;
-  return { score: Math.max(0, Math.min(1, score)), matched };
+  return {
+    score: Math.max(0, Math.min(1, score)),
+    matched,
+    matchedExactly: coverage(queryTokens, [...titleTokens, ...authorTokens], tokensEqual),
+  };
 }
 
 export function rankCandidates(
@@ -104,8 +110,21 @@ export function rankCandidates(
     .sort((a, b) => b.score - a.score);
 }
 
-/** Сильное совпадение: первый результат — не пересказ, и в нём нашлись все слова запроса. */
+/**
+ * Сильное совпадение: первый результат — не пересказ, и все слова запроса нашлись в нём
+ * буква в букву. Если слово совпало лишь «с опечаткой», в запросе, скорее всего, ошибка:
+ * каталог ищет все слова сразу и мог спрятать нужную книгу — стоит поискать ещё.
+ */
 export function isStrongMatch(ranked: RankedCandidate[], query: string): boolean {
+  const [first] = ranked;
+  if (!first) return false;
+  return (
+    first.matchedExactly === 1 && (!isDerivative(first.title) || isDerivative(query))
+  );
+}
+
+/** Хорошее совпадение: все слова запроса нашлись, пусть и с поправкой на опечатки. */
+export function isGoodMatch(ranked: RankedCandidate[], query: string): boolean {
   const [first] = ranked;
   if (!first) return false;
   return first.matched === 1 && (!isDerivative(first.title) || isDerivative(query));

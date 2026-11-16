@@ -10,11 +10,18 @@ import { parseSearchResponse } from "@/books/openlibrary/parse";
 import { normalizeQuery } from "@/books/query";
 import {
   assessConfidence,
+  isGoodMatch,
   isStrongMatch,
   mergeDuplicates,
   rankCandidates,
 } from "@/books/rank";
-import { hasCyrillic, normalizeText, tokenize } from "@/books/text";
+import {
+  hasCyrillic,
+  normalizeText,
+  queryWords,
+  tokenize,
+  tokensEqual,
+} from "@/books/text";
 import type { BookCandidate, SearchOutcome, SearchStrategy } from "@/books/types";
 import { createWikidataSuggest, firstSuggestion } from "@/books/wikidata";
 import type { CacheStore } from "@/lib/cache";
@@ -64,7 +71,7 @@ export function catalogQuery(query: string): string {
 
 /** Нечёткий запрос: «~» после слова разрешает каталогу одну-две опечатки в нём. */
 export function fuzzyQuery(query: string): string | null {
-  const words = normalizeText(query).split(" ").filter(Boolean);
+  const words = queryWords(query);
   if (!words.some((word) => word.length >= 4)) return null;
   return words.map((word) => (word.length >= 4 ? `${word}~` : word)).join(" ");
 }
@@ -73,14 +80,22 @@ export function fuzzyQuery(query: string): string | null {
  * Ослабленные запросы: каталог ищет все слова сразу, и одно слово с опечаткой
  * («outliers gladwel») прячет нужную книгу. Убираем по одному слову — оставшиеся
  * находят книгу, а сравнение с полным запросом, терпимое к опечаткам, выбирает её.
+ *
+ * known — слова лучшего из уже найденных результатов: слово запроса, которого среди них
+ * нет буква в букву, — первый кандидат на опечатку, его убираем раньше остальных.
  */
-export function relaxedQueries(query: string): string[] {
-  const words = tokenize(query);
+export function relaxedQueries(query: string, known: string[] = []): string[] {
+  const words = queryWords(query);
   if (words.length < 2) return [];
-  // Длинные слова убираем первыми: в них опечатка вероятнее.
+  const suspect = (word: string) =>
+    known.length > 0 &&
+    !tokenize(word).some((token) => known.some((k) => tokensEqual(token, k)));
   const order = words
-    .map((word, index) => ({ word, index }))
-    .sort((a, b) => b.word.length - a.word.length)
+    .map((word, index) => ({ word, index, suspect: suspect(word) }))
+    // Сначала подозрительные, затем длинные: в длинном слове опечатка вероятнее.
+    .sort(
+      (a, b) => Number(b.suspect) - Number(a.suspect) || b.word.length - a.word.length,
+    )
     .slice(0, MAX_RELAXED_QUERIES);
   return order.map(({ index }) =>
     words.filter((_, position) => position !== index).join(" "),
@@ -130,9 +145,14 @@ async function runSearch(
   const suggest = deps.suggest === undefined ? defaultSuggest() : deps.suggest;
   const lang = hasCyrillic(query) ? "ru" : "en";
 
-  async function find(catalogText: string, limit?: number): Promise<BookCandidate[]> {
-    const body = await client.getJson(searchPath(catalogText, lang, limit));
-    return body === null ? [] : parseSearchResponse(body).candidates;
+  async function find(
+    catalogText: string,
+    limit?: number,
+    language: "ru" | "en" = lang,
+  ): Promise<BookCandidate[]> {
+    const body = await client.getJson(searchPath(catalogText, language, limit));
+    if (body === null) return [];
+    return parseSearchResponse(body, language === "ru" ? "rus" : "eng").candidates;
   }
 
   let strategy: SearchStrategy = "exact";
@@ -144,19 +164,28 @@ async function runSearch(
 
   // 2. Нет сильного совпадения — ослабляем запрос и выбираем лучшее из всего найденного.
   if (!isStrongMatch(ranked, query)) {
-    const relaxed = relaxedQueries(cleaned);
-    const fuzzy = relaxed.length === 0 || pool.length === 0 ? fuzzyQuery(cleaned) : null;
-    for (const variant of [...relaxed, ...(fuzzy ? [fuzzy] : [])]) {
+    const top = ranked[0];
+    const known = top
+      ? tokenize([top.title, top.subtitle ?? "", ...top.authors].join(" "))
+      : [];
+    const relaxed = relaxedQueries(cleaned, known);
+    const tryVariant = async (variant: string) => {
       pool = [...pool, ...(await find(variant, RELAXED_LIMIT))];
       const next = rankCandidates(mergeDuplicates(pool), query);
-      if ((next[0]?.score ?? 0) > (ranked[0]?.score ?? 0)) strategy = "fuzzy";
+      if (next[0] && next[0].workId !== ranked[0]?.workId) strategy = "fuzzy";
       ranked = next;
+    };
+    for (const variant of relaxed) {
+      await tryVariant(variant);
       if (isStrongMatch(ranked, query)) break;
     }
+    // Совсем ничего — просим каталог простить опечатки в словах.
+    const fuzzy = pool.length === 0 ? fuzzyQuery(cleaned) : null;
+    if (fuzzy) await tryVariant(fuzzy);
   }
 
   // 3. Всё ещё нет — спрашиваем исправленное или переведённое название у запасных источников.
-  if (!isStrongMatch(ranked, query) && suggest) {
+  if (!isGoodMatch(ranked, query) && suggest) {
     const suggestion = await suggest(cleaned);
     if (suggestion) {
       const corrected = catalogQuery(
@@ -164,7 +193,12 @@ async function runSearch(
       );
       if (corrected && normalizeText(corrected) !== normalizeText(cleaned)) {
         // Здесь оцениваем по исправленному запросу: с введённым результаты заведомо расходятся.
-        const fixed = rankCandidates(mergeDuplicates(await find(corrected)), corrected);
+        const found = await find(
+          corrected,
+          undefined,
+          hasCyrillic(corrected) ? "ru" : "en",
+        );
+        const fixed = rankCandidates(mergeDuplicates(found), corrected);
         if (isStrongMatch(fixed, corrected)) {
           ranked = fixed;
           strategy = "corrected";

@@ -35,13 +35,29 @@ describe("разбор поиска", () => {
         {
           key: "/works/OL1W",
           title: "Sapiens",
-          editions: { docs: [{ title: "Sapiens. Краткая история человечества" }] },
+          editions: {
+            docs: [{ title: "Sapiens. Краткая история человечества", language: ["rus"] }],
+          },
         },
       ],
     };
-    const [book] = parseSearchResponse(body).candidates;
+    const [book] = parseSearchResponse(body, "rus").candidates;
     expect(book.title).toBe("Sapiens. Краткая история человечества");
     expect(book.subtitle).toBe("Sapiens");
+  });
+
+  it("издание на другом языке не подменяет название произведения", () => {
+    const body = {
+      docs: [
+        {
+          key: "/works/OL1W",
+          title: "Atomic Habits",
+          editions: { docs: [{ title: "Hábitos Atómicos", language: ["spa"] }] },
+        },
+      ],
+    };
+    expect(parseSearchResponse(body, "rus").candidates[0].title).toBe("Atomic Habits");
+    expect(parseSearchResponse(body).candidates[0].title).toBe("Atomic Habits");
   });
 
   it("пропускает записи без ключа или названия и не падает на мусоре", () => {

@@ -85,7 +85,11 @@ export interface SearchPage {
   candidates: BookCandidate[];
 }
 
-export function parseSearchResponse(body: unknown): SearchPage {
+/**
+ * preferLanguage — код языка (rus, eng), на котором хотим показать название:
+ * если каталог подобрал издание на этом языке, берём название издания.
+ */
+export function parseSearchResponse(body: unknown, preferLanguage?: string): SearchPage {
   if (!isObject(body) || !Array.isArray(body.docs)) {
     throw new CatalogError("bad_response", "В ответе поиска нет списка docs");
   }
@@ -96,10 +100,14 @@ export function parseSearchResponse(body: unknown): SearchPage {
     const workTitle = asString(doc.title);
     if (!workId || !workTitle) continue;
 
-    // Если каталог подобрал издание на языке запроса, показываем его название.
+    // Издание на другом языке (например, испанское для русского запроса) не подходит:
+    // тогда честнее показать название самого произведения.
     let editionTitle: string | undefined;
-    if (isObject(doc.editions) && Array.isArray(doc.editions.docs)) {
-      const edition = doc.editions.docs.find(isObject);
+    if (preferLanguage && isObject(doc.editions) && Array.isArray(doc.editions.docs)) {
+      const edition = doc.editions.docs.find(
+        (item): item is Json =>
+          isObject(item) && asStrings(item.language).includes(preferLanguage),
+      );
       editionTitle = edition ? asString(edition.title) : undefined;
     }
 
