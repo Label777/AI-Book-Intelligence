@@ -1,0 +1,816 @@
+{
+  "analysisId": "OL0000000W-ru-d7c0ccaa82",
+  "step": "assemble",
+  "inputHash": "96369733a52bf8466cc29dfaeebd7207ec8f16190b11fcec3d21d13e06c9e8a2",
+  "startedAt": "2026-11-16T12:00:00.000Z",
+  "status": "done",
+  "output": {
+    "slides": [
+      {
+        "id": "sl1",
+        "section": "cover",
+        "template": "cover",
+        "title": "Тихие системы",
+        "blocks": [
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Автор",
+            "value": "Анна Верес"
+          },
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Год первой публикации",
+            "value": "2019"
+          },
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Категория",
+            "value": "Менеджмент"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Главная идея",
+            "claimId": "c48"
+          },
+          {
+            "kind": "note",
+            "group": null,
+            "text": "Анализ по открытым источникам"
+          }
+        ]
+      },
+      {
+        "id": "sl2",
+        "section": "overview",
+        "template": "overview",
+        "title": "О чём эта книга",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Проблема",
+            "claimId": "c1"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Что хотел донести автор",
+            "claimId": "c2"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Какое решение предлагает",
+            "claimId": "c3"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Кому будет полезна",
+            "claimId": "c4"
+          }
+        ]
+      },
+      {
+        "id": "sl3",
+        "section": "ideas",
+        "template": "ideas",
+        "title": "Главные идеи",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Сигнальный долг",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c15"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c16"
+              },
+              {
+                "role": "Почему это важно",
+                "claimId": "c17"
+              }
+            ],
+            "actionId": "a1"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Три фильтра",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c18"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c19"
+              }
+            ],
+            "actionId": "a2"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Один канал для срочного",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c20"
+              },
+              {
+                "role": "Почему это важно",
+                "claimId": "c21"
+              }
+            ],
+            "actionId": "a3"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Внимание как ресурс",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c22"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c23"
+              }
+            ],
+            "actionId": "a4"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Меньше оповещений — быстрее реакция",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c24"
+              }
+            ],
+            "actionId": "a5"
+          }
+        ]
+      },
+      {
+        "id": "sl4",
+        "section": "units",
+        "template": "chapters",
+        "title": "Разбор по главам",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Шум",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c5"
+              },
+              {
+                "role": "Главный вывод",
+                "claimId": "c6"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Фильтры",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c7"
+              },
+              {
+                "role": null,
+                "claimId": "c8"
+              },
+              {
+                "role": "Главный вывод",
+                "claimId": "c9"
+              },
+              {
+                "role": "Связь с предыдущим",
+                "claimId": "c10"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Тишина",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c11"
+              },
+              {
+                "role": "Главный вывод",
+                "claimId": "c12"
+              }
+            ],
+            "actionId": null
+          }
+        ]
+      },
+      {
+        "id": "sl5",
+        "section": "concepts",
+        "template": "concept",
+        "title": "Сигнальный долг",
+        "blocks": [
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Ключевые концепции",
+            "value": "Модель"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c34"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Как это работает",
+            "claimId": "c35"
+          },
+          {
+            "kind": "diagram",
+            "group": null,
+            "diagram": {
+              "type": "flow",
+              "title": "Как растёт сигнальный долг",
+              "items": [
+                {
+                  "label": "Сообщения приходят",
+                  "note": null
+                },
+                {
+                  "label": "Часть остаётся неразобранной",
+                  "note": null
+                },
+                {
+                  "label": "Качество решений падает",
+                  "note": null
+                }
+              ],
+              "axes": []
+            }
+          }
+        ]
+      },
+      {
+        "id": "sl6",
+        "section": "concepts",
+        "template": "concept",
+        "title": "Метод трёх фильтров",
+        "blocks": [
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Ключевые концепции",
+            "value": "Методика"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c36"
+          },
+          {
+            "kind": "diagram",
+            "group": null,
+            "diagram": {
+              "type": "tree",
+              "title": "Три фильтра",
+              "items": [
+                {
+                  "label": "Источник",
+                  "note": null
+                },
+                {
+                  "label": "Срок",
+                  "note": null
+                },
+                {
+                  "label": "Цена ошибки",
+                  "note": null
+                }
+              ],
+              "axes": []
+            }
+          }
+        ]
+      },
+      {
+        "id": "sl7",
+        "section": "insights",
+        "template": "insight",
+        "title": "Самые ценные инсайты (1 из 2)",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "1",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c25"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c26"
+              },
+              {
+                "role": "Пример из жизни",
+                "claimId": "c27"
+              },
+              {
+                "role": "Как это меняет мышление",
+                "claimId": "c28"
+              }
+            ],
+            "actionId": "a6"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "2",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c29"
+              }
+            ],
+            "actionId": "a7"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "3",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c30"
+              },
+              {
+                "role": "Как это меняет мышление",
+                "claimId": "c31"
+              }
+            ],
+            "actionId": "a8"
+          }
+        ]
+      },
+      {
+        "id": "sl8",
+        "section": "insights",
+        "template": "insight",
+        "title": "Самые ценные инсайты (2 из 2)",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "4",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c32"
+              }
+            ],
+            "actionId": "a9"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "5",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c33"
+              }
+            ],
+            "actionId": "a10"
+          }
+        ]
+      },
+      {
+        "id": "sl9",
+        "section": "practice",
+        "template": "practice",
+        "title": "Практическое применение",
+        "blocks": [
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a1"
+          },
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a2"
+          },
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a6"
+          },
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a7"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a3"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a4"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a8"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a9"
+          },
+          {
+            "kind": "action",
+            "group": "В повседневной жизни",
+            "actionId": "a5"
+          },
+          {
+            "kind": "action",
+            "group": "В повседневной жизни",
+            "actionId": "a10"
+          }
+        ]
+      },
+      {
+        "id": "sl10",
+        "section": "worldview",
+        "template": "worldview",
+        "title": "Психология и философия автора",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Как автор смотрит на мир",
+            "claimId": "c37"
+          },
+          {
+            "kind": "claim",
+            "group": "Убеждения в основе книги",
+            "role": null,
+            "claimId": "c38"
+          },
+          {
+            "kind": "claim",
+            "group": "Убеждения в основе книги",
+            "role": null,
+            "claimId": "c39"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Какую модель мышления предлагает",
+            "claimId": "c40"
+          }
+        ]
+      },
+      {
+        "id": "sl11",
+        "section": "critique",
+        "template": "critique",
+        "title": "Критический анализ",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": "Сильные стороны",
+            "role": null,
+            "claimId": "c41"
+          },
+          {
+            "kind": "claim",
+            "group": "Сильные стороны",
+            "role": null,
+            "claimId": "c42"
+          },
+          {
+            "kind": "claim",
+            "group": "Слабые стороны",
+            "role": null,
+            "claimId": "c43"
+          },
+          {
+            "kind": "claim",
+            "group": "Недоказанные гипотезы",
+            "role": null,
+            "claimId": "c44"
+          }
+        ]
+      },
+      {
+        "id": "sl12",
+        "section": "connections",
+        "template": "connections",
+        "title": "Связь с другими знаниями",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": "Пересекается с теориями",
+            "title": "Теория ограничений",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c45"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": "Книги, которые дополняют",
+            "title": "Карта внимания",
+            "subtitle": "Илья Морев",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c46"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "claim",
+            "group": "Что можно объединить",
+            "role": null,
+            "claimId": "c47"
+          }
+        ]
+      },
+      {
+        "id": "sl13",
+        "section": "takeaways",
+        "template": "takeaways",
+        "title": "Главные выводы",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Одна главная мысль",
+            "claimId": "c48"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c49"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c50"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c51"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c52"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c53"
+          }
+        ]
+      },
+      {
+        "id": "sl14",
+        "section": "plan",
+        "template": "plan",
+        "title": "План внедрения",
+        "blocks": [
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a2"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a5"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a7"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a10"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 7 дней",
+            "actionId": "a1"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 7 дней",
+            "actionId": "a3"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 7 дней",
+            "actionId": "a6"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 30 дней",
+            "actionId": "a4"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 30 дней",
+            "actionId": "a8"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 30 дней",
+            "actionId": "a9"
+          }
+        ]
+      },
+      {
+        "id": "sl15",
+        "section": "scores",
+        "template": "scores",
+        "title": "AI-аналитика",
+        "blocks": [
+          {
+            "kind": "note",
+            "group": null,
+            "text": "Оценки — мнение AI с объяснением, а не научный рейтинг."
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "depth",
+            "label": "Глубина идей",
+            "value": 7,
+            "claimId": "c54"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "practicality",
+            "label": "Практическая ценность",
+            "value": 9,
+            "claimId": "c55"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "originality",
+            "label": "Оригинальность",
+            "value": 7,
+            "claimId": "c56"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "rigor",
+            "label": "Достоверность аргументации",
+            "value": 5,
+            "claimId": "c57"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "relevance",
+            "label": "Актуальность",
+            "value": 9,
+            "claimId": "c58"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "difficulty",
+            "label": "Сложность восприятия",
+            "value": 3,
+            "claimId": "c59"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Самая сильная идея",
+            "subtitle": "Сигнальный долг",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c60"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Самая недооценённая идея",
+            "subtitle": "Внимание как ресурс",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c61"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Самая спорная идея",
+            "subtitle": "Меньше оповещений — быстрее реакция",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c62"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Идея с наибольшим практическим потенциалом",
+            "subtitle": "Один канал для срочного",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c63"
+              }
+            ],
+            "actionId": null
+          }
+        ]
+      }
+    ]
+  },
+  "error": null,
+  "usage": {
+    "calls": 0,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "webSearches": 0
+  },
+  "finishedAt": "2026-11-16T12:00:00.000Z"
+}

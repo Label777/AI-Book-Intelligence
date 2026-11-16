@@ -1,0 +1,251 @@
+{
+  "analysisId": "OL0000000W-ru-d7c0ccaa82",
+  "step": "summary",
+  "inputHash": "f730e8249507907679dec450ada7670b7113681f23651087402c18b9a19d663e",
+  "startedAt": "2026-11-16T12:00:00.000Z",
+  "status": "done",
+  "output": {
+    "claims": [
+      {
+        "id": "c1",
+        "type": "book_fact",
+        "text": "Книга разбирает, почему организации принимают плохие решения из-за избытка сигналов, а не из-за нехватки данных.",
+        "evidence": [
+          {
+            "sourceId": "s1",
+            "excerptId": "s1e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c2",
+        "type": "ai_interpretation",
+        "text": "Автор хочет показать, что внимание руководителя нужно защищать так же строго, как бюджет.",
+        "evidence": [],
+        "basedOn": [
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c3",
+        "type": "book_fact",
+        "text": "В качестве решения автор предлагает метод трёх фильтров: источник, срок и цена ошибки.",
+        "evidence": [
+          {
+            "sourceId": "s1",
+            "excerptId": "s1e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c4",
+        "type": "book_fact",
+        "text": "Книга написана для руководителей, перегруженных уведомлениями и отчётами.",
+        "evidence": [
+          {
+            "sourceId": "s6",
+            "excerptId": "s6e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c5",
+        "type": "book_fact",
+        "text": "Автор вводит понятие сигнального долга — накопленных необработанных сообщений, снижающих качество решений.",
+        "evidence": [
+          {
+            "sourceId": "s2",
+            "excerptId": "s2e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c6",
+        "type": "ai_interpretation",
+        "text": "Шум в организации копится как долг и со временем обходится всё дороже.",
+        "evidence": [],
+        "basedOn": [
+          "c5"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c7",
+        "type": "book_fact",
+        "text": "Метод трёх фильтров оценивает каждое сообщение по источнику, сроку и цене ошибки.",
+        "evidence": [
+          {
+            "sourceId": "s1",
+            "excerptId": "s1e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c8",
+        "type": "book_fact",
+        "text": "Правило «один канал для срочного» автор называет главным практическим выводом.",
+        "evidence": [
+          {
+            "sourceId": "s4",
+            "excerptId": "s4e3"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c9",
+        "type": "ai_interpretation",
+        "text": "Фильтры переносят решение о важности с получателя на правила системы.",
+        "evidence": [],
+        "basedOn": [
+          "c7",
+          "c8"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c10",
+        "type": "ai_interpretation",
+        "text": "Вторая часть отвечает на проблему первой: фильтры гасят сигнальный долг.",
+        "evidence": [],
+        "basedOn": [
+          "c5",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c11",
+        "type": "book_fact",
+        "text": "В книге описана команда диспетчеров, которая втрое сократила число оповещений и стала реагировать быстрее.",
+        "evidence": [
+          {
+            "sourceId": "s3",
+            "excerptId": "s3e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c12",
+        "type": "ai_interpretation",
+        "text": "Тишина оказывается рабочим состоянием системы, а не признаком бездействия.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c13",
+        "type": "book_fact",
+        "text": "По мнению автора, внимание руководителя — самый дефицитный ресурс организации.",
+        "evidence": [
+          {
+            "sourceId": "s4",
+            "excerptId": "s4e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c14",
+        "type": "book_fact",
+        "text": "Книга состоит из трёх частей: «Шум», «Фильтры» и «Тишина».",
+        "evidence": [
+          {
+            "sourceId": "s2",
+            "excerptId": "s2e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      }
+    ],
+    "overview": {
+      "problem": "c1",
+      "intent": "c2",
+      "solution": "c3",
+      "audience": "c4"
+    },
+    "units": [
+      {
+        "unitId": "u1",
+        "facts": [
+          "c5"
+        ],
+        "conclusion": "c6",
+        "link": null
+      },
+      {
+        "unitId": "u2",
+        "facts": [
+          "c7",
+          "c8"
+        ],
+        "conclusion": "c9",
+        "link": "c10"
+      },
+      {
+        "unitId": "u3",
+        "facts": [
+          "c11"
+        ],
+        "conclusion": "c12",
+        "link": null
+      }
+    ]
+  },
+  "error": null,
+  "usage": {
+    "calls": 1,
+    "inputTokens": 1000,
+    "outputTokens": 400,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "webSearches": 0
+  },
+  "finishedAt": "2026-11-16T12:00:00.000Z"
+}

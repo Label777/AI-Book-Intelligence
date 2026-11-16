@@ -8,3 +8,5 @@ next-env.d.ts
 AGENTS.md
 docs/screenshots
 *.md
+.e2e-store
+tests/fixtures/analysis

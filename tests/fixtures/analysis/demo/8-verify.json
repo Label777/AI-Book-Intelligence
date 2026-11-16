@@ -1,0 +1,2031 @@
+{
+  "analysisId": "OL0000000W-ru-d7c0ccaa82",
+  "step": "verify",
+  "inputHash": "54b9508021602f1b8599f73a2edeafa002ead9ee75db9ef4d65c87fbb806eb71",
+  "startedAt": "2026-11-16T12:00:00.000Z",
+  "status": "done",
+  "output": {
+    "claims": [
+      {
+        "id": "c1",
+        "type": "book_fact",
+        "text": "Книга разбирает, почему организации принимают плохие решения из-за избытка сигналов, а не из-за нехватки данных.",
+        "evidence": [
+          {
+            "sourceId": "s1",
+            "excerptId": "s1e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c2",
+        "type": "ai_interpretation",
+        "text": "Автор хочет показать, что внимание руководителя нужно защищать так же строго, как бюджет.",
+        "evidence": [],
+        "basedOn": [
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c3",
+        "type": "book_fact",
+        "text": "В качестве решения автор предлагает метод трёх фильтров: источник, срок и цена ошибки.",
+        "evidence": [
+          {
+            "sourceId": "s1",
+            "excerptId": "s1e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c4",
+        "type": "book_fact",
+        "text": "Книга написана для руководителей, перегруженных уведомлениями и отчётами.",
+        "evidence": [
+          {
+            "sourceId": "s6",
+            "excerptId": "s6e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c5",
+        "type": "book_fact",
+        "text": "Автор вводит понятие сигнального долга — накопленных необработанных сообщений, снижающих качество решений.",
+        "evidence": [
+          {
+            "sourceId": "s2",
+            "excerptId": "s2e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c6",
+        "type": "ai_interpretation",
+        "text": "Шум в организации копится как долг и со временем обходится всё дороже.",
+        "evidence": [],
+        "basedOn": [
+          "c5"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c7",
+        "type": "book_fact",
+        "text": "Метод трёх фильтров оценивает каждое сообщение по источнику, сроку и цене ошибки.",
+        "evidence": [
+          {
+            "sourceId": "s1",
+            "excerptId": "s1e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c8",
+        "type": "book_fact",
+        "text": "Правило «один канал для срочного» автор называет главным практическим выводом.",
+        "evidence": [
+          {
+            "sourceId": "s4",
+            "excerptId": "s4e3"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c9",
+        "type": "ai_interpretation",
+        "text": "Фильтры переносят решение о важности с получателя на правила системы.",
+        "evidence": [],
+        "basedOn": [
+          "c7",
+          "c8"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c10",
+        "type": "ai_interpretation",
+        "text": "Вторая часть отвечает на проблему первой: фильтры гасят сигнальный долг.",
+        "evidence": [],
+        "basedOn": [
+          "c5",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c11",
+        "type": "book_fact",
+        "text": "В книге описана команда диспетчеров, которая втрое сократила число оповещений и стала реагировать быстрее.",
+        "evidence": [
+          {
+            "sourceId": "s3",
+            "excerptId": "s3e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c12",
+        "type": "ai_interpretation",
+        "text": "Тишина оказывается рабочим состоянием системы, а не признаком бездействия.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c13",
+        "type": "book_fact",
+        "text": "По мнению автора, внимание руководителя — самый дефицитный ресурс организации.",
+        "evidence": [
+          {
+            "sourceId": "s4",
+            "excerptId": "s4e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c14",
+        "type": "book_fact",
+        "text": "Книга состоит из трёх частей: «Шум», «Фильтры» и «Тишина».",
+        "evidence": [
+          {
+            "sourceId": "s2",
+            "excerptId": "s2e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c15",
+        "type": "ai_interpretation",
+        "text": "Необработанные сообщения ведут себя как долг: чем дольше копятся, тем хуже становятся решения.",
+        "evidence": [],
+        "basedOn": [
+          "c5"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c16",
+        "type": "ai_interpretation",
+        "text": "Каждое непрочитанное уведомление забирает немного внимания, и в сумме это мешает думать.",
+        "evidence": [],
+        "basedOn": [
+          "c15"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c17",
+        "type": "ai_interpretation",
+        "text": "Понятие даёт руководителю измеримый повод сокращать поток сообщений.",
+        "evidence": [],
+        "basedOn": [
+          "c15"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c18",
+        "type": "ai_interpretation",
+        "text": "Сообщение заслуживает внимания, только когда известны его источник, срок и цена ошибки.",
+        "evidence": [],
+        "basedOn": [
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c19",
+        "type": "ai_interpretation",
+        "text": "Прежде чем читать письмо, полезно спросить: от кого оно, к какому часу и что будет при промахе.",
+        "evidence": [],
+        "basedOn": [
+          "c18"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c20",
+        "type": "ai_interpretation",
+        "text": "Срочное должно приходить единственным путём, иначе срочным начинает казаться всё подряд.",
+        "evidence": [],
+        "basedOn": [
+          "c8"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c21",
+        "type": "ai_interpretation",
+        "text": "Без такого правила люди проверяют все каналы сразу и теряют время на переключения.",
+        "evidence": [],
+        "basedOn": [
+          "c20"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c22",
+        "type": "ai_interpretation",
+        "text": "Главное ограничение организации — не объём данных, а внимание тех, кто принимает решения.",
+        "evidence": [],
+        "basedOn": [
+          "c13",
+          "c1"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c23",
+        "type": "ai_interpretation",
+        "text": "Данных может быть сколько угодно, но рассмотреть их способен только человек с ограниченным временем.",
+        "evidence": [],
+        "basedOn": [
+          "c22"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c24",
+        "type": "ai_interpretation",
+        "text": "Сокращение оповещений не ослабляет бдительность, а ускоряет ответ на действительно важное.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c25",
+        "type": "ai_interpretation",
+        "text": "Отчёт, который никто не читает, вреден вдвойне: создаёт иллюзию контроля и добавляет шума.",
+        "evidence": [],
+        "basedOn": [
+          "c5"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c26",
+        "type": "ai_interpretation",
+        "text": "Его существование успокаивает, хотя содержание ни на что не влияет.",
+        "evidence": [],
+        "basedOn": [
+          "c25"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c27",
+        "type": "ai_interpretation",
+        "text": "Еженедельная сводка на сорок строк, которую открывают двое из двадцати получателей.",
+        "evidence": [],
+        "basedOn": [
+          "c25"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c28",
+        "type": "ai_interpretation",
+        "text": "Вопрос «что ещё измерить» сменяется вопросом «что перестать рассылать».",
+        "evidence": [],
+        "basedOn": [
+          "c25"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c29",
+        "type": "ai_interpretation",
+        "text": "Фильтр по цене ошибки главнее фильтра по сроку: дешёвый промах легко исправить позже.",
+        "evidence": [],
+        "basedOn": [
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c30",
+        "type": "ai_interpretation",
+        "text": "Привычка проверять всё подряд возникает там, где нет правил маршрутизации сообщений.",
+        "evidence": [],
+        "basedOn": [
+          "c8"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c31",
+        "type": "ai_interpretation",
+        "text": "Проблема перестаёт выглядеть личной слабостью и становится задачей проектирования.",
+        "evidence": [],
+        "basedOn": [
+          "c30"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c32",
+        "type": "ai_interpretation",
+        "text": "Диспетчеры выиграли не благодаря новой технологии, а благодаря отказу от лишнего.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c33",
+        "type": "ai_interpretation",
+        "text": "Спокойная рабочая среда получается из устройства процессов, а не из самодисциплины сотрудников.",
+        "evidence": [],
+        "basedOn": [
+          "c13",
+          "c14"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c34",
+        "type": "book_fact",
+        "text": "Сигнальный долг — это накопленные необработанные сообщения, которые снижают качество решений.",
+        "evidence": [
+          {
+            "sourceId": "s2",
+            "excerptId": "s2e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c35",
+        "type": "ai_interpretation",
+        "text": "Долг растёт незаметно: по одному сообщению, пока разбор не станет отдельной работой.",
+        "evidence": [],
+        "basedOn": [
+          "c34"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c36",
+        "type": "book_fact",
+        "text": "Метод трёх фильтров — проверка сообщения по источнику, сроку и цене ошибки.",
+        "evidence": [
+          {
+            "sourceId": "s1",
+            "excerptId": "s1e2"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c37",
+        "type": "ai_interpretation",
+        "text": "Автор рассматривает организацию как систему передачи сигналов с ограниченной пропускной способностью.",
+        "evidence": [],
+        "basedOn": [
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c38",
+        "type": "ai_interpretation",
+        "text": "Поведение людей определяется устройством среды сильнее, чем их намерениями.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c39",
+        "type": "ai_interpretation",
+        "text": "Избыток информации для автора опаснее её нехватки.",
+        "evidence": [],
+        "basedOn": [
+          "c1"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c40",
+        "type": "ai_interpretation",
+        "text": "Читателю предлагается сначала убирать лишнее и лишь потом добавлять новое.",
+        "evidence": [],
+        "basedOn": [
+          "c7",
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c41",
+        "type": "critique",
+        "text": "Главный тезис подкреплён наблюдаемым случаем, а не одними рассуждениями.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c42",
+        "type": "external_research",
+        "text": "Исследование 2021 года показало: операторы, получавшие меньше оповещений, реже пропускали критические события.",
+        "evidence": [
+          {
+            "sourceId": "s5",
+            "excerptId": "s5e1"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c43",
+        "type": "external_research",
+        "text": "Рецензент отмечает, что почти все примеры книги взяты из крупных компаний.",
+        "evidence": [
+          {
+            "sourceId": "s3",
+            "excerptId": "s3e3"
+          }
+        ],
+        "basedOn": [],
+        "quote": null,
+        "verification": "supported",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c44",
+        "type": "critique",
+        "text": "Из одного случая с диспетчерами нельзя вывести, что правило сработает в любой команде.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c45",
+        "type": "ai_interpretation",
+        "text": "Внимание руководителя играет роль узкого места, которое определяет пропускную способность всей системы.",
+        "evidence": [],
+        "basedOn": [
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c46",
+        "type": "ai_interpretation",
+        "text": "Дополняет книгу взглядом на то же ограничение со стороны отдельного человека, а не организации.",
+        "evidence": [],
+        "basedOn": [
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c47",
+        "type": "ai_interpretation",
+        "text": "Три фильтра и единый срочный канал усиливают друг друга: первое решает, что пропустить, второе — куда направить.",
+        "evidence": [],
+        "basedOn": [
+          "c7",
+          "c8"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c48",
+        "type": "ai_interpretation",
+        "text": "Качество решений растёт, когда организация учится молчать о неважном.",
+        "evidence": [],
+        "basedOn": [
+          "c1",
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c49",
+        "type": "ai_interpretation",
+        "text": "Прежде чем добавлять новый отчёт, стоит найти тот, который можно отменить.",
+        "evidence": [],
+        "basedOn": [
+          "c5"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c50",
+        "type": "ai_interpretation",
+        "text": "У каждого сообщения должны быть отправитель, крайний час и понятная цена промаха.",
+        "evidence": [],
+        "basedOn": [
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c51",
+        "type": "ai_interpretation",
+        "text": "Пока срочное приходит несколькими путями, люди вынуждены следить за всеми.",
+        "evidence": [],
+        "basedOn": [
+          "c8"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c52",
+        "type": "ai_interpretation",
+        "text": "Меньшее число оповещений в описанном случае сопровождалось более быстрой реакцией.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c53",
+        "type": "ai_interpretation",
+        "text": "Беречь стоит не только деньги компании, но и время тех, кто решает.",
+        "evidence": [],
+        "basedOn": [
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c54",
+        "type": "critique",
+        "text": "Книга предлагает одну сильную модель, но развивает её на немногих примерах.",
+        "evidence": [],
+        "basedOn": [
+          "c11",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c55",
+        "type": "critique",
+        "text": "Метод из трёх вопросов и правило единого канала можно применить без подготовки.",
+        "evidence": [],
+        "basedOn": [
+          "c11",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c56",
+        "type": "critique",
+        "text": "Образ долга для необработанных сообщений — собственная находка автора.",
+        "evidence": [],
+        "basedOn": [
+          "c11",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c57",
+        "type": "critique",
+        "text": "Аргументация держится на одном подробно описанном случае.",
+        "evidence": [],
+        "basedOn": [
+          "c11",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c58",
+        "type": "critique",
+        "text": "Поток уведомлений с момента выхода книги только вырос.",
+        "evidence": [],
+        "basedOn": [
+          "c11",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c59",
+        "type": "critique",
+        "text": "Изложение опирается на бытовые примеры и не требует специальных знаний.",
+        "evidence": [],
+        "basedOn": [
+          "c11",
+          "c7"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c60",
+        "type": "ai_interpretation",
+        "text": "Через образ долга объясняются почти все остальные положения книги.",
+        "evidence": [],
+        "basedOn": [
+          "c5"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c61",
+        "type": "ai_interpretation",
+        "text": "Мысль о внимании как ограничении звучит вскользь, хотя на ней стоит весь метод.",
+        "evidence": [],
+        "basedOn": [
+          "c13"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c62",
+        "type": "critique",
+        "text": "Вывод о пользе сокращения оповещений опирается на единственный случай.",
+        "evidence": [],
+        "basedOn": [
+          "c11"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      },
+      {
+        "id": "c63",
+        "type": "ai_interpretation",
+        "text": "О едином срочном канале можно договориться за одну встречу.",
+        "evidence": [],
+        "basedOn": [
+          "c8"
+        ],
+        "quote": null,
+        "verification": "unverified",
+        "downgradedFrom": null
+      }
+    ],
+    "content": {
+      "structure": {
+        "kind": "chapters",
+        "verified": true,
+        "tocSourceIds": [
+          "s3",
+          "s4"
+        ],
+        "units": [
+          {
+            "id": "u1",
+            "title": "Шум"
+          },
+          {
+            "id": "u2",
+            "title": "Фильтры"
+          },
+          {
+            "id": "u3",
+            "title": "Тишина"
+          }
+        ]
+      },
+      "overview": {
+        "problem": "c1",
+        "intent": "c2",
+        "solution": "c3",
+        "audience": "c4"
+      },
+      "units": [
+        {
+          "unitId": "u1",
+          "facts": [
+            "c5"
+          ],
+          "conclusion": "c6",
+          "link": null
+        },
+        {
+          "unitId": "u2",
+          "facts": [
+            "c7",
+            "c8"
+          ],
+          "conclusion": "c9",
+          "link": "c10"
+        },
+        {
+          "unitId": "u3",
+          "facts": [
+            "c11"
+          ],
+          "conclusion": "c12",
+          "link": null
+        }
+      ],
+      "ideas": [
+        {
+          "id": "idea1",
+          "title": "Сигнальный долг",
+          "statement": "c15",
+          "explanation": "c16",
+          "importance": "c17",
+          "actionId": "a1"
+        },
+        {
+          "id": "idea2",
+          "title": "Три фильтра",
+          "statement": "c18",
+          "explanation": "c19",
+          "importance": null,
+          "actionId": "a2"
+        },
+        {
+          "id": "idea3",
+          "title": "Один канал для срочного",
+          "statement": "c20",
+          "explanation": null,
+          "importance": "c21",
+          "actionId": "a3"
+        },
+        {
+          "id": "idea4",
+          "title": "Внимание как ресурс",
+          "statement": "c22",
+          "explanation": "c23",
+          "importance": null,
+          "actionId": "a4"
+        },
+        {
+          "id": "idea5",
+          "title": "Меньше оповещений — быстрее реакция",
+          "statement": "c24",
+          "explanation": null,
+          "importance": null,
+          "actionId": "a5"
+        }
+      ],
+      "concepts": [
+        {
+          "id": "concept1",
+          "name": "Сигнальный долг",
+          "kind": "model",
+          "statement": "c34",
+          "explanation": "c35",
+          "diagram": {
+            "type": "flow",
+            "title": "Как растёт сигнальный долг",
+            "items": [
+              {
+                "label": "Сообщения приходят",
+                "note": null
+              },
+              {
+                "label": "Часть остаётся неразобранной",
+                "note": null
+              },
+              {
+                "label": "Качество решений падает",
+                "note": null
+              }
+            ],
+            "axes": []
+          }
+        },
+        {
+          "id": "concept2",
+          "name": "Метод трёх фильтров",
+          "kind": "method",
+          "statement": "c36",
+          "explanation": null,
+          "diagram": {
+            "type": "tree",
+            "title": "Три фильтра",
+            "items": [
+              {
+                "label": "Источник",
+                "note": null
+              },
+              {
+                "label": "Срок",
+                "note": null
+              },
+              {
+                "label": "Цена ошибки",
+                "note": null
+              }
+            ],
+            "axes": []
+          }
+        }
+      ],
+      "insights": [
+        {
+          "id": "insight1",
+          "essence": "c25",
+          "explanation": "c26",
+          "example": "c27",
+          "mindShift": "c28",
+          "actionId": "a6"
+        },
+        {
+          "id": "insight2",
+          "essence": "c29",
+          "explanation": null,
+          "example": null,
+          "mindShift": null,
+          "actionId": "a7"
+        },
+        {
+          "id": "insight3",
+          "essence": "c30",
+          "explanation": null,
+          "example": null,
+          "mindShift": "c31",
+          "actionId": "a8"
+        },
+        {
+          "id": "insight4",
+          "essence": "c32",
+          "explanation": null,
+          "example": null,
+          "mindShift": null,
+          "actionId": "a9"
+        },
+        {
+          "id": "insight5",
+          "essence": "c33",
+          "explanation": null,
+          "example": null,
+          "mindShift": null,
+          "actionId": "a10"
+        }
+      ],
+      "worldview": {
+        "lens": "c37",
+        "beliefs": [
+          "c38",
+          "c39"
+        ],
+        "thinkingModel": "c40"
+      },
+      "critique": {
+        "strengths": [
+          "c41",
+          "c42"
+        ],
+        "weaknesses": [
+          "c43"
+        ],
+        "disputed": [],
+        "unproven": [
+          "c44"
+        ],
+        "outdated": [],
+        "contradicted": []
+      },
+      "connections": {
+        "theories": [
+          {
+            "name": "Теория ограничений",
+            "relation": "c45"
+          }
+        ],
+        "books": [
+          {
+            "title": "Карта внимания",
+            "author": "Илья Морев",
+            "relation": "c46"
+          }
+        ],
+        "combinations": [
+          "c47"
+        ]
+      },
+      "takeaways": {
+        "main": "c48",
+        "items": [
+          "c49",
+          "c50",
+          "c51",
+          "c52",
+          "c53"
+        ]
+      },
+      "scores": [
+        {
+          "dimension": "depth",
+          "value": 7,
+          "rationale": "c54"
+        },
+        {
+          "dimension": "practicality",
+          "value": 9,
+          "rationale": "c55"
+        },
+        {
+          "dimension": "originality",
+          "value": 7,
+          "rationale": "c56"
+        },
+        {
+          "dimension": "rigor",
+          "value": 5,
+          "rationale": "c57"
+        },
+        {
+          "dimension": "relevance",
+          "value": 9,
+          "rationale": "c58"
+        },
+        {
+          "dimension": "difficulty",
+          "value": 3,
+          "rationale": "c59"
+        }
+      ],
+      "highlights": [
+        {
+          "kind": "strongest",
+          "ideaId": "idea1",
+          "reason": "c60"
+        },
+        {
+          "kind": "underrated",
+          "ideaId": "idea4",
+          "reason": "c61"
+        },
+        {
+          "kind": "disputed",
+          "ideaId": "idea5",
+          "reason": "c62"
+        },
+        {
+          "kind": "practical",
+          "ideaId": "idea3",
+          "reason": "c63"
+        }
+      ],
+      "actions": [
+        {
+          "text": "В пятницу вечером посчитать непрочитанные сообщения в трёх главных каналах и записать число.",
+          "object": "непрочитанные сообщения",
+          "when": "в пятницу вечером",
+          "horizon": "7d",
+          "context": "work",
+          "id": "a1",
+          "claimId": "c15"
+        },
+        {
+          "text": "Завтра утром разобрать входящие по трём вопросам и удалить всё, что не прошло ни одного.",
+          "object": "входящие письма",
+          "when": "завтра утром",
+          "horizon": "24h",
+          "context": "work",
+          "id": "a2",
+          "claimId": "c18"
+        },
+        {
+          "text": "На ближайшей планёрке договориться с командой, какой один канал используется для срочных вопросов.",
+          "object": "канал для срочных вопросов",
+          "when": "на ближайшей планёрке",
+          "horizon": "7d",
+          "context": "business",
+          "id": "a3",
+          "claimId": "c20"
+        },
+        {
+          "text": "В течение месяца раз в неделю отмечать в календаре часы, потраченные на чтение отчётов.",
+          "object": "часы на чтение отчётов",
+          "when": "раз в неделю в течение месяца",
+          "horizon": "30d",
+          "context": "business",
+          "id": "a4",
+          "claimId": "c22"
+        },
+        {
+          "text": "Сегодня отключить на телефоне уведомления трёх приложений, которые открываются реже раза в день.",
+          "object": "уведомления приложений",
+          "when": "сегодня",
+          "horizon": "24h",
+          "context": "life",
+          "id": "a5",
+          "claimId": "c24"
+        },
+        {
+          "text": "До конца недели спросить у получателей одной регулярной сводки, какие строки они используют.",
+          "object": "регулярная сводка",
+          "when": "до конца недели",
+          "horizon": "7d",
+          "context": "work",
+          "id": "a6",
+          "claimId": "c25"
+        },
+        {
+          "text": "Завтра перед ответом на каждое письмо с пометкой «срочно» оценить, во что обойдётся задержка на день.",
+          "object": "письма с пометкой «срочно»",
+          "when": "завтра",
+          "horizon": "24h",
+          "context": "work",
+          "id": "a7",
+          "claimId": "c29"
+        },
+        {
+          "text": "В течение месяца вести список случаев, когда важное сообщение пришло не тем каналом.",
+          "object": "случаи неверной маршрутизации",
+          "when": "в течение месяца",
+          "horizon": "30d",
+          "context": "business",
+          "id": "a8",
+          "claimId": "c30"
+        },
+        {
+          "text": "На следующем обсуждении нового инструмента сначала назвать один процесс, который можно убрать.",
+          "object": "процесс, который можно убрать",
+          "when": "на следующем обсуждении нового инструмента",
+          "horizon": "30d",
+          "context": "business",
+          "id": "a9",
+          "claimId": "c32"
+        },
+        {
+          "text": "Сегодня вечером выбрать один домашний чат и на неделю перевести его в режим без звука.",
+          "object": "домашний чат",
+          "when": "сегодня вечером",
+          "horizon": "24h",
+          "context": "life",
+          "id": "a10",
+          "claimId": "c33"
+        }
+      ]
+    },
+    "slides": [
+      {
+        "id": "sl1",
+        "section": "cover",
+        "template": "cover",
+        "title": "Тихие системы",
+        "blocks": [
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Автор",
+            "value": "Анна Верес"
+          },
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Год первой публикации",
+            "value": "2019"
+          },
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Категория",
+            "value": "Менеджмент"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Главная идея",
+            "claimId": "c48"
+          },
+          {
+            "kind": "note",
+            "group": null,
+            "text": "Анализ по открытым источникам"
+          }
+        ]
+      },
+      {
+        "id": "sl2",
+        "section": "overview",
+        "template": "overview",
+        "title": "О чём эта книга",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Проблема",
+            "claimId": "c1"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Что хотел донести автор",
+            "claimId": "c2"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Какое решение предлагает",
+            "claimId": "c3"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Кому будет полезна",
+            "claimId": "c4"
+          }
+        ]
+      },
+      {
+        "id": "sl3",
+        "section": "ideas",
+        "template": "ideas",
+        "title": "Главные идеи",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Сигнальный долг",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c15"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c16"
+              },
+              {
+                "role": "Почему это важно",
+                "claimId": "c17"
+              }
+            ],
+            "actionId": "a1"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Три фильтра",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c18"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c19"
+              }
+            ],
+            "actionId": "a2"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Один канал для срочного",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c20"
+              },
+              {
+                "role": "Почему это важно",
+                "claimId": "c21"
+              }
+            ],
+            "actionId": "a3"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Внимание как ресурс",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c22"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c23"
+              }
+            ],
+            "actionId": "a4"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Меньше оповещений — быстрее реакция",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c24"
+              }
+            ],
+            "actionId": "a5"
+          }
+        ]
+      },
+      {
+        "id": "sl4",
+        "section": "units",
+        "template": "chapters",
+        "title": "Разбор по главам",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Шум",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c5"
+              },
+              {
+                "role": "Главный вывод",
+                "claimId": "c6"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Фильтры",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c7"
+              },
+              {
+                "role": null,
+                "claimId": "c8"
+              },
+              {
+                "role": "Главный вывод",
+                "claimId": "c9"
+              },
+              {
+                "role": "Связь с предыдущим",
+                "claimId": "c10"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Тишина",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c11"
+              },
+              {
+                "role": "Главный вывод",
+                "claimId": "c12"
+              }
+            ],
+            "actionId": null
+          }
+        ]
+      },
+      {
+        "id": "sl5",
+        "section": "concepts",
+        "template": "concept",
+        "title": "Сигнальный долг",
+        "blocks": [
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Ключевые концепции",
+            "value": "Модель"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c34"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Как это работает",
+            "claimId": "c35"
+          },
+          {
+            "kind": "diagram",
+            "group": null,
+            "diagram": {
+              "type": "flow",
+              "title": "Как растёт сигнальный долг",
+              "items": [
+                {
+                  "label": "Сообщения приходят",
+                  "note": null
+                },
+                {
+                  "label": "Часть остаётся неразобранной",
+                  "note": null
+                },
+                {
+                  "label": "Качество решений падает",
+                  "note": null
+                }
+              ],
+              "axes": []
+            }
+          }
+        ]
+      },
+      {
+        "id": "sl6",
+        "section": "concepts",
+        "template": "concept",
+        "title": "Метод трёх фильтров",
+        "blocks": [
+          {
+            "kind": "meta",
+            "group": null,
+            "label": "Ключевые концепции",
+            "value": "Методика"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c36"
+          },
+          {
+            "kind": "diagram",
+            "group": null,
+            "diagram": {
+              "type": "tree",
+              "title": "Три фильтра",
+              "items": [
+                {
+                  "label": "Источник",
+                  "note": null
+                },
+                {
+                  "label": "Срок",
+                  "note": null
+                },
+                {
+                  "label": "Цена ошибки",
+                  "note": null
+                }
+              ],
+              "axes": []
+            }
+          }
+        ]
+      },
+      {
+        "id": "sl7",
+        "section": "insights",
+        "template": "insight",
+        "title": "Самые ценные инсайты (1 из 2)",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "1",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c25"
+              },
+              {
+                "role": "Простыми словами",
+                "claimId": "c26"
+              },
+              {
+                "role": "Пример из жизни",
+                "claimId": "c27"
+              },
+              {
+                "role": "Как это меняет мышление",
+                "claimId": "c28"
+              }
+            ],
+            "actionId": "a6"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "2",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c29"
+              }
+            ],
+            "actionId": "a7"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "3",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c30"
+              },
+              {
+                "role": "Как это меняет мышление",
+                "claimId": "c31"
+              }
+            ],
+            "actionId": "a8"
+          }
+        ]
+      },
+      {
+        "id": "sl8",
+        "section": "insights",
+        "template": "insight",
+        "title": "Самые ценные инсайты (2 из 2)",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": null,
+            "title": "4",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c32"
+              }
+            ],
+            "actionId": "a9"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "5",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c33"
+              }
+            ],
+            "actionId": "a10"
+          }
+        ]
+      },
+      {
+        "id": "sl9",
+        "section": "practice",
+        "template": "practice",
+        "title": "Практическое применение",
+        "blocks": [
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a1"
+          },
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a2"
+          },
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a6"
+          },
+          {
+            "kind": "action",
+            "group": "В работе",
+            "actionId": "a7"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a3"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a4"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a8"
+          },
+          {
+            "kind": "action",
+            "group": "В бизнесе",
+            "actionId": "a9"
+          },
+          {
+            "kind": "action",
+            "group": "В повседневной жизни",
+            "actionId": "a5"
+          },
+          {
+            "kind": "action",
+            "group": "В повседневной жизни",
+            "actionId": "a10"
+          }
+        ]
+      },
+      {
+        "id": "sl10",
+        "section": "worldview",
+        "template": "worldview",
+        "title": "Психология и философия автора",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Как автор смотрит на мир",
+            "claimId": "c37"
+          },
+          {
+            "kind": "claim",
+            "group": "Убеждения в основе книги",
+            "role": null,
+            "claimId": "c38"
+          },
+          {
+            "kind": "claim",
+            "group": "Убеждения в основе книги",
+            "role": null,
+            "claimId": "c39"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Какую модель мышления предлагает",
+            "claimId": "c40"
+          }
+        ]
+      },
+      {
+        "id": "sl11",
+        "section": "critique",
+        "template": "critique",
+        "title": "Критический анализ",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": "Сильные стороны",
+            "role": null,
+            "claimId": "c41"
+          },
+          {
+            "kind": "claim",
+            "group": "Сильные стороны",
+            "role": null,
+            "claimId": "c42"
+          },
+          {
+            "kind": "claim",
+            "group": "Слабые стороны",
+            "role": null,
+            "claimId": "c43"
+          },
+          {
+            "kind": "claim",
+            "group": "Недоказанные гипотезы",
+            "role": null,
+            "claimId": "c44"
+          }
+        ]
+      },
+      {
+        "id": "sl12",
+        "section": "connections",
+        "template": "connections",
+        "title": "Связь с другими знаниями",
+        "blocks": [
+          {
+            "kind": "item",
+            "group": "Пересекается с теориями",
+            "title": "Теория ограничений",
+            "subtitle": null,
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c45"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": "Книги, которые дополняют",
+            "title": "Карта внимания",
+            "subtitle": "Илья Морев",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c46"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "claim",
+            "group": "Что можно объединить",
+            "role": null,
+            "claimId": "c47"
+          }
+        ]
+      },
+      {
+        "id": "sl13",
+        "section": "takeaways",
+        "template": "takeaways",
+        "title": "Главные выводы",
+        "blocks": [
+          {
+            "kind": "claim",
+            "group": null,
+            "role": "Одна главная мысль",
+            "claimId": "c48"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c49"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c50"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c51"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c52"
+          },
+          {
+            "kind": "claim",
+            "group": null,
+            "role": null,
+            "claimId": "c53"
+          }
+        ]
+      },
+      {
+        "id": "sl14",
+        "section": "plan",
+        "template": "plan",
+        "title": "План внедрения",
+        "blocks": [
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a2"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a5"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a7"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 24 часа",
+            "actionId": "a10"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 7 дней",
+            "actionId": "a1"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 7 дней",
+            "actionId": "a3"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 7 дней",
+            "actionId": "a6"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 30 дней",
+            "actionId": "a4"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 30 дней",
+            "actionId": "a8"
+          },
+          {
+            "kind": "action",
+            "group": "Первые 30 дней",
+            "actionId": "a9"
+          }
+        ]
+      },
+      {
+        "id": "sl15",
+        "section": "scores",
+        "template": "scores",
+        "title": "AI-аналитика",
+        "blocks": [
+          {
+            "kind": "note",
+            "group": null,
+            "text": "Оценки — мнение AI с объяснением, а не научный рейтинг."
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "depth",
+            "label": "Глубина идей",
+            "value": 7,
+            "claimId": "c54"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "practicality",
+            "label": "Практическая ценность",
+            "value": 9,
+            "claimId": "c55"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "originality",
+            "label": "Оригинальность",
+            "value": 7,
+            "claimId": "c56"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "rigor",
+            "label": "Достоверность аргументации",
+            "value": 5,
+            "claimId": "c57"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "relevance",
+            "label": "Актуальность",
+            "value": 9,
+            "claimId": "c58"
+          },
+          {
+            "kind": "score",
+            "group": null,
+            "dimension": "difficulty",
+            "label": "Сложность восприятия",
+            "value": 3,
+            "claimId": "c59"
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Самая сильная идея",
+            "subtitle": "Сигнальный долг",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c60"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Самая недооценённая идея",
+            "subtitle": "Внимание как ресурс",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c61"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Самая спорная идея",
+            "subtitle": "Меньше оповещений — быстрее реакция",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c62"
+              }
+            ],
+            "actionId": null
+          },
+          {
+            "kind": "item",
+            "group": null,
+            "title": "Идея с наибольшим практическим потенциалом",
+            "subtitle": "Один канал для срочного",
+            "claims": [
+              {
+                "role": null,
+                "claimId": "c63"
+              }
+            ],
+            "actionId": null
+          }
+        ]
+      }
+    ],
+    "report": {
+      "checked": 13,
+      "supported": 13,
+      "downgraded": 0,
+      "removed": 0,
+      "cascaded": 0,
+      "quotes": 0,
+      "slides": 15,
+      "missingSections": [],
+      "warnings": [],
+      "publishable": true,
+      "reasons": []
+    }
+  },
+  "error": null,
+  "usage": {
+    "calls": 2,
+    "inputTokens": 2000,
+    "outputTokens": 800,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "webSearches": 0
+  },
+  "finishedAt": "2026-11-16T12:00:00.000Z"
+}

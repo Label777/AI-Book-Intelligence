@@ -1,0 +1,39 @@
+{
+  "analysisId": "OL0000000W-ru-d7c0ccaa82",
+  "step": "structure",
+  "inputHash": "ce7ccb171cba325989549a27b2e355b8da809251361e08fdbd18a8c8f09347a8",
+  "startedAt": "2026-11-16T12:00:00.000Z",
+  "status": "done",
+  "output": {
+    "kind": "chapters",
+    "verified": true,
+    "tocSourceIds": [
+      "s3",
+      "s4"
+    ],
+    "units": [
+      {
+        "id": "u1",
+        "title": "Шум"
+      },
+      {
+        "id": "u2",
+        "title": "Фильтры"
+      },
+      {
+        "id": "u3",
+        "title": "Тишина"
+      }
+    ]
+  },
+  "error": null,
+  "usage": {
+    "calls": 0,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "webSearches": 0
+  },
+  "finishedAt": "2026-11-16T12:00:00.000Z"
+}

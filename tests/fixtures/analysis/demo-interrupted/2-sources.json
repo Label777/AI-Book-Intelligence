@@ -1,0 +1,177 @@
+{
+  "analysisId": "OL0000000W-ru-d7c0ccaa82",
+  "step": "sources",
+  "inputHash": "757ea547d70e7ed2bb054969a0ed6513365dbc7781c9bfb16ffdb72f92f65ac6",
+  "startedAt": "2026-11-16T12:00:00.000Z",
+  "status": "done",
+  "output": {
+    "sources": [
+      {
+        "id": "s0",
+        "kind": "description",
+        "title": "Аннотация из каталога: Тихие системы",
+        "url": null,
+        "domain": null,
+        "retrievedAt": "2026-11-16T12:00:00.000Z",
+        "reliability": "medium",
+        "excerpts": [
+          {
+            "id": "s0e1",
+            "text": "Книга о том, как организации снижают информационный шум."
+          }
+        ]
+      },
+      {
+        "id": "s1",
+        "kind": "description",
+        "title": "Тихие системы — издательство",
+        "url": "https://izdatel.example/tihie-sistemy",
+        "domain": "izdatel.example",
+        "retrievedAt": "2026-11-16T12:00:00.000Z",
+        "reliability": "high",
+        "excerpts": [
+          {
+            "id": "s1e1",
+            "text": "Книга объясняет, почему организации принимают плохие решения не из-за нехватки данных, а из-за избытка сигналов."
+          },
+          {
+            "id": "s1e2",
+            "text": "Автор предлагает метод трёх фильтров: источник, срок и цена ошибки."
+          }
+        ]
+      },
+      {
+        "id": "s2",
+        "kind": "encyclopedia",
+        "title": "Тихие системы — энциклопедия",
+        "url": "https://encyclopedia.example/wiki/quiet-systems",
+        "domain": "encyclopedia.example",
+        "retrievedAt": "2026-11-16T12:00:00.000Z",
+        "reliability": "high",
+        "excerpts": [
+          {
+            "id": "s2e1",
+            "text": "В книге вводится понятие сигнального долга — накопленных необработанных сообщений, которые снижают качество решений."
+          },
+          {
+            "id": "s2e2",
+            "text": "Книга состоит из трёх частей: «Шум», «Фильтры» и «Тишина»."
+          }
+        ]
+      },
+      {
+        "id": "s3",
+        "kind": "review",
+        "title": "Рецензия: Тихие системы",
+        "url": "https://review-a.example/quiet-systems",
+        "domain": "review-a.example",
+        "retrievedAt": "2026-11-16T12:00:00.000Z",
+        "reliability": "medium",
+        "excerpts": [
+          {
+            "id": "s3e1",
+            "text": "Оглавление: Шум, Фильтры, Тишина."
+          },
+          {
+            "id": "s3e2",
+            "text": "Верес описывает команду диспетчеров, которая сократила число оповещений втрое и стала реагировать быстрее."
+          },
+          {
+            "id": "s3e3",
+            "text": "Слабое место книги — почти все примеры взяты из крупных компаний."
+          }
+        ]
+      },
+      {
+        "id": "s4",
+        "kind": "review",
+        "title": "Разбор книги «Тихие системы»",
+        "url": "https://review-b.example/tihie-sistemy",
+        "domain": "review-b.example",
+        "retrievedAt": "2026-11-16T12:00:00.000Z",
+        "reliability": "medium",
+        "excerpts": [
+          {
+            "id": "s4e1",
+            "text": "Главы книги: Шум; Фильтры; Тишина."
+          },
+          {
+            "id": "s4e2",
+            "text": "По мнению автора, внимание руководителя — самый дефицитный ресурс организации."
+          },
+          {
+            "id": "s4e3",
+            "text": "Правило «один канал для срочного» автор называет главным практическим выводом."
+          }
+        ]
+      },
+      {
+        "id": "s5",
+        "kind": "research",
+        "title": "Исследование усталости от оповещений",
+        "url": "https://journal.example/alerts-study",
+        "domain": "journal.example",
+        "retrievedAt": "2026-11-16T12:00:00.000Z",
+        "reliability": "high",
+        "excerpts": [
+          {
+            "id": "s5e1",
+            "text": "В исследовании 2021 года операторы, получавшие меньше оповещений, допускали меньше пропусков критических событий."
+          }
+        ]
+      },
+      {
+        "id": "s6",
+        "kind": "interview",
+        "title": "Интервью с Анной Верес",
+        "url": "https://interview.example/veres",
+        "domain": "interview.example",
+        "retrievedAt": "2026-11-16T12:00:00.000Z",
+        "reliability": "high",
+        "excerpts": [
+          {
+            "id": "s6e1",
+            "text": "Я писала эту книгу для руководителей, которые тонут в уведомлениях и отчётах."
+          }
+        ]
+      }
+    ],
+    "toc": {
+      "verified": true,
+      "chapters": [
+        "Шум",
+        "Фильтры",
+        "Тишина"
+      ],
+      "sourceIds": [
+        "s3",
+        "s4"
+      ]
+    },
+    "coverage": {
+      "level": "sufficient",
+      "hasDescription": true,
+      "hasVerifiedToc": true,
+      "independentContentSources": 5,
+      "hasCriticism": true,
+      "byKind": {
+        "description": 2,
+        "encyclopedia": 1,
+        "review": 2,
+        "research": 1,
+        "interview": 1
+      },
+      "missing": []
+    }
+  },
+  "error": null,
+  "usage": {
+    "calls": 2,
+    "inputTokens": 2000,
+    "outputTokens": 800,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "webSearches": 5
+  },
+  "finishedAt": "2026-11-16T12:00:00.000Z"
+}

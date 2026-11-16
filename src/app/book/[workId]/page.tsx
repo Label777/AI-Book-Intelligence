@@ -3,11 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { Suspense } from "react";
+import { analysisIdFor, getAnalysisService } from "@/analysis/service";
+import { startAnalysisAction } from "@/app/analysis/actions";
 import { languageName } from "@/books/languages";
 import { normalizeQuery } from "@/books/query";
 import { CatalogError, type BookDetails, type Edition } from "@/books/types";
 import { getBook, isEditionId, isWorkId } from "@/books/work";
 import { BookCover } from "@/components/ui/book-cover";
+import { Button, buttonClasses } from "@/components/ui/button";
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
 import { cn } from "@/lib/cn";
 import { plural } from "@/lib/plural";
@@ -39,6 +42,12 @@ function pageHref(workId: string, state: PageState): string {
   const query = params.toString();
   return `/book/${workId}${query ? `?${query}` : ""}`;
 }
+
+const LAUNCH_ERRORS: Record<string, string> = {
+  busy: "Сейчас создаётся слишком много анализов. Попробуйте через несколько минут.",
+  catalog: "Каталог книг не ответил, анализ не запущен. Попробуйте ещё раз.",
+  "no-author": "У книги не указан автор — анализ для неё недоступен.",
+};
 
 const DESCRIPTION_PREVIEW = 600;
 
@@ -219,6 +228,23 @@ async function BookContent({ params, searchParams }: PageProps<"/book/[workId]">
   const selected = book.editions.find((edition) => edition.id === state.edition);
   state.edition = selected?.id;
 
+  const analysis = getAnalysisService();
+  const existing = await analysis.status(
+    analysisIdFor({
+      book: {
+        workId: book.workId,
+        title: book.title,
+        authors: book.authors.length > 0 ? book.authors : ["?"],
+        firstPublishYear: null,
+        description: null,
+        subjects: [],
+      },
+      mode: "sources_only",
+      language: "ru",
+    }),
+  );
+  const launchError = LAUNCH_ERRORS[first(query.error) ?? ""];
+
   const [descriptionHead, descriptionRest] = book.description
     ? splitDescription(book.description)
     : ["", ""];
@@ -291,7 +317,6 @@ async function BookContent({ params, searchParams }: PageProps<"/book/[workId]">
 
       <section
         aria-labelledby="next-title"
-        role="status"
         className="mt-12 rounded-card border border-line bg-surface p-6"
       >
         <h2 id="next-title" className="font-medium text-ink">
@@ -299,10 +324,61 @@ async function BookContent({ params, searchParams }: PageProps<"/book/[workId]">
             ? `Выбрано издание: ${selected.title}${selected.year ? `, ${selected.year}` : ""}`
             : "Издание не выбрано"}
         </h2>
-        <p className="mt-2 max-w-[70ch] text-ink-2">
-          Запуск анализа появится на следующем этапе разработки. Перед ним здесь будет
-          отчёт о том, какие источники о книге найдены и каких не хватает.
-        </p>
+        {launchError ? (
+          <p role="alert" className="mt-3 text-src-critique">
+            {launchError}
+          </p>
+        ) : null}
+        {existing?.phase === "ready" ? (
+          <>
+            <p className="mt-2 max-w-[70ch] text-ink-2">Анализ этой книги уже готов.</p>
+            <p className="mt-4">
+              <Link
+                href={`/analysis/${existing.meta.id}`}
+                className={buttonClasses("primary", "lg")}
+              >
+                Открыть анализ
+              </Link>
+            </p>
+          </>
+        ) : existing?.phase === "running" ? (
+          <>
+            <p className="mt-2 max-w-[70ch] text-ink-2">
+              Анализ этой книги создаётся прямо сейчас.
+            </p>
+            <p className="mt-4">
+              <Link
+                href={`/analysis/${existing.meta.id}`}
+                className={buttonClasses("primary", "lg")}
+              >
+                Смотреть ход работы
+              </Link>
+            </p>
+          </>
+        ) : book.authors.length === 0 ? (
+          <p className="mt-2 max-w-[70ch] text-ink-2">
+            В каталоге у этой книги не указан автор, а без него нельзя надёжно искать
+            источники. Анализ для неё пока недоступен.
+          </p>
+        ) : analysis.available ? (
+          <>
+            <p className="mt-2 max-w-[70ch] text-ink-2">
+              Анализ строится по открытым источникам: текста книги у нас нет. Сначала мы
+              найдём источники и покажем, чего не хватает; обычно всё занимает несколько
+              минут.
+            </p>
+            <form action={startAnalysisAction} className="mt-4">
+              <input type="hidden" name="workId" value={book.workId} />
+              <Button type="submit" size="lg">
+                Создать анализ
+              </Button>
+            </form>
+          </>
+        ) : (
+          <p className="mt-2 max-w-[70ch] text-ink-2">
+            Запуск анализа сейчас недоступен: на сервере не задан ключ Claude API.
+          </p>
+        )}
         <p className="mt-3">
           <a
             href={`https://openlibrary.org/works/${book.workId}`}

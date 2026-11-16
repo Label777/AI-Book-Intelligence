@@ -1,0 +1,29 @@
+{
+  "analysisId": "OL0000000W-ru-d7c0ccaa82",
+  "step": "identify",
+  "inputHash": "ee60e1b6402708277bec8630cb4c779001d8d144bedb588697bbc3ff5079f7c9",
+  "startedAt": "2026-11-16T12:00:00.000Z",
+  "status": "done",
+  "output": {
+    "workId": "OL0000000W",
+    "title": "Тихие системы",
+    "authors": [
+      "Анна Верес"
+    ],
+    "firstPublishYear": 2019,
+    "description": "Книга о том, как организации снижают информационный шум.",
+    "subjects": [
+      "Менеджмент"
+    ]
+  },
+  "error": null,
+  "usage": {
+    "calls": 0,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "webSearches": 0
+  },
+  "finishedAt": "2026-11-16T12:00:00.000Z"
+}

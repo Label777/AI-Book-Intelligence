@@ -1,0 +1,65 @@
+{
+  "analysisId": "OL0000000W-ru-d7c0ccaa82",
+  "step": "visuals",
+  "inputHash": "d8ec4798e2f8119b51feae3a0313a323290a159dfc88050efb987f69f1e1f32a",
+  "startedAt": "2026-11-16T12:00:00.000Z",
+  "status": "done",
+  "output": {
+    "diagrams": [
+      {
+        "conceptId": "concept1",
+        "diagram": {
+          "type": "flow",
+          "title": "Как растёт сигнальный долг",
+          "items": [
+            {
+              "label": "Сообщения приходят",
+              "note": null
+            },
+            {
+              "label": "Часть остаётся неразобранной",
+              "note": null
+            },
+            {
+              "label": "Качество решений падает",
+              "note": null
+            }
+          ],
+          "axes": []
+        }
+      },
+      {
+        "conceptId": "concept2",
+        "diagram": {
+          "type": "tree",
+          "title": "Три фильтра",
+          "items": [
+            {
+              "label": "Источник",
+              "note": null
+            },
+            {
+              "label": "Срок",
+              "note": null
+            },
+            {
+              "label": "Цена ошибки",
+              "note": null
+            }
+          ],
+          "axes": []
+        }
+      }
+    ]
+  },
+  "error": null,
+  "usage": {
+    "calls": 1,
+    "inputTokens": 1000,
+    "outputTokens": 400,
+    "cacheReadTokens": 0,
+    "cacheWriteTokens": 0,
+    "webSearches": 0
+  },
+  "finishedAt": "2026-11-16T12:00:00.000Z"
+}

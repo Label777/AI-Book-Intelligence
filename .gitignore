@@ -26,3 +26,5 @@ blob-report/
 *.pem
 .vercel/
 search-eval.json
+.e2e-store/
+.data/
