@@ -10,3 +10,5 @@ docs/screenshots
 *.md
 .e2e-store
 tests/fixtures/analysis
+.pages-build
+out

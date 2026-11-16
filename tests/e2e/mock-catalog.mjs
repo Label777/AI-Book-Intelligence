@@ -27,7 +27,11 @@ function searchFixture(q) {
 const server = createServer((request, response) => {
   const url = new URL(request.url ?? "/", `http://127.0.0.1:${port}`);
   const send = (status, body) => {
-    response.writeHead(status, { "content-type": "application/json; charset=utf-8" });
+    // Настоящие каталоги разрешают запросы из браузера с любого сайта — заглушка тоже.
+    response.writeHead(status, {
+      "content-type": "application/json; charset=utf-8",
+      "access-control-allow-origin": "*",
+    });
     response.end(body);
   };
 

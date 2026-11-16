@@ -1,0 +1,49 @@
+name: Сайт на GitHub Pages
+
+# Собирает статическую версию сайта и выкладывает её в ветку gh-pages,
+# откуда её отдаёт GitHub Pages: https://label777.github.io/AI-Book-Intelligence/
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    name: Сборка и публикация
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # Сначала проверяем сборку на заглушке каталога, потом собираем настоящую.
+      - run: npx playwright install --with-deps chromium
+      - name: Проверка статической сборки
+        env:
+          NEXT_PUBLIC_OPEN_LIBRARY_BASE_URL: http://127.0.0.1:3101
+          NEXT_PUBLIC_GOOGLE_BOOKS_BASE_URL: http://127.0.0.1:3101
+          NEXT_PUBLIC_WIKIDATA_BASE_URL: http://127.0.0.1:3101
+        run: npm run build:pages && npm run test:pages
+
+      - name: Сборка
+        run: npm run build:pages
+
+      - name: Публикация в ветку gh-pages
+        run: |
+          cd out
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Сайт из $GITHUB_SHA"
+          git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gh-pages

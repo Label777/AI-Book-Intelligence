@@ -16,7 +16,9 @@
     "eval": "vitest run --config vitest.live.config.mts",
     "eval:search": "vitest run --config vitest.eval.config.mts",
     "check": "npm run lint && npm run format:check && npm run typecheck && npm run test",
-    "fixtures:analysis": "vitest run --config vitest.fixtures.config.mts"
+    "fixtures:analysis": "vitest run --config vitest.fixtures.config.mts",
+    "build:pages": "node scripts/build-pages.mjs",
+    "test:pages": "playwright test --config playwright.static.config.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",

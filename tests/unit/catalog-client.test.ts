@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it, vi } from "vitest";
 import { createGoogleBooksSuggest } from "@/books/google-books";
 import {
@@ -45,6 +46,22 @@ describe("клиент каталога", () => {
     expect(headers["User-Agent"]).toMatch(
       /^AIBookIntelligence\/[\d.]+ \(\+https:\/\/github\.com\//,
     );
+  });
+
+  it("из браузера не шлёт своих заголовков: иначе браузер начал бы с предварительного запроса", async () => {
+    vi.resetModules();
+    vi.stubGlobal("window", {});
+    const browser = await import("@/books/openlibrary/client");
+    const fetchMock = vi.fn(async () => json({ ok: true }));
+    const client = browser.createCatalogClient({
+      fetch: fetchMock as unknown as typeof fetch,
+      waitTurn: async () => {},
+    });
+    await client.getJson("/works/OL1W.json");
+    const [, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
+    expect(init.headers).toBeUndefined();
+    vi.unstubAllGlobals();
+    vi.resetModules();
   });
 
   it("в User-Agent нет почты, пока её не задали явно", () => {

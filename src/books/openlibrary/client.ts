@@ -4,10 +4,13 @@ import { createRateLimiter } from "@/lib/rate-limit";
 
 /** Адрес каталога; в сценарных тестах подменяется локальной заглушкой. */
 function baseUrl(): string {
-  return (
-    process.env.OPEN_LIBRARY_BASE_URL?.replace(/\/+$/, "") || "https://openlibrary.org"
-  );
+  const custom =
+    process.env.OPEN_LIBRARY_BASE_URL || process.env.NEXT_PUBLIC_OPEN_LIBRARY_BASE_URL;
+  return custom?.replace(/\/+$/, "") || "https://openlibrary.org";
 }
+
+/** В статической сборке запросы идут прямо из браузера посетителя. */
+const IN_BROWSER = typeof window !== "undefined";
 const REPOSITORY_URL = "https://github.com/Label777/AI-Book-Intelligence";
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -71,7 +74,11 @@ export function createCatalogClient(options: CatalogClientOptions = {}): Catalog
       let response: Response;
       try {
         response = await doFetch(`${baseUrl()}${path}`, {
-          headers: { "User-Agent": userAgent(), Accept: "application/json" },
+          // Браузер не даёт менять User-Agent, а нестандартный заголовок потребовал бы
+          // предварительного запроса, который каталог может не обслужить.
+          headers: IN_BROWSER
+            ? undefined
+            : { "User-Agent": userAgent(), Accept: "application/json" },
           signal: AbortSignal.timeout(timeoutMs),
           cache: "no-store",
         });

@@ -65,10 +65,15 @@ export function createWikidataSuggest(options: Options = {}): SuggestTitle {
   const timeoutMs = options.timeoutMs ?? 5000;
 
   async function call(params: Record<string, string>): Promise<Json | null> {
-    const base = process.env.WIKIDATA_BASE_URL?.replace(/\/+$/, "");
-    const url = `${base ? `${base}/w/api.php` : API}?${new URLSearchParams({ ...params, format: "json" })}`;
+    const base = (
+      process.env.WIKIDATA_BASE_URL || process.env.NEXT_PUBLIC_WIKIDATA_BASE_URL
+    )?.replace(/\/+$/, "");
+    const url = `${base ? `${base}/w/api.php` : API}?${new URLSearchParams({ ...params, format: "json", origin: "*" })}`;
     const response = await doFetch(url, {
-      headers: { "User-Agent": USER_AGENT, Accept: "application/json" },
+      headers:
+        typeof window === "undefined"
+          ? { "User-Agent": USER_AGENT, Accept: "application/json" }
+          : undefined,
       signal: AbortSignal.timeout(timeoutMs),
       cache: "no-store",
     });

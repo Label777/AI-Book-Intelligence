@@ -33,10 +33,11 @@ export function createGoogleBooksSuggest(options: SuggestOptions = {}): SuggestT
 
     try {
       const base =
-        process.env.GOOGLE_BOOKS_BASE_URL?.replace(/\/+$/, "") ||
-        "https://www.googleapis.com";
+        (
+          process.env.GOOGLE_BOOKS_BASE_URL ||
+          process.env.NEXT_PUBLIC_GOOGLE_BOOKS_BASE_URL
+        )?.replace(/\/+$/, "") || "https://www.googleapis.com";
       const response = await doFetch(`${base}/books/v1/volumes?${params}`, {
-        headers: { Accept: "application/json" },
         signal: AbortSignal.timeout(timeoutMs),
         cache: "no-store",
       });

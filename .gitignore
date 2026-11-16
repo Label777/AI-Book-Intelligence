@@ -28,3 +28,4 @@ blob-report/
 search-eval.json
 .e2e-store/
 .data/
+.pages-build/
