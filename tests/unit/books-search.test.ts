@@ -1,5 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
-import { catalogQuery, fuzzyQuery, searchBooks, searchPath } from "@/books/search";
+import {
+  catalogQuery,
+  fuzzyQuery,
+  relaxedQueries,
+  searchBooks,
+  searchPath,
+} from "@/books/search";
+import { MemoryCache } from "@/lib/cache";
 import { CatalogError } from "@/books/types";
 import {
   EDITIONS_PAGE_SIZE,
@@ -26,6 +33,18 @@ describe("подготовка запроса", () => {
     expect(fuzzyQuery("it")).toBeNull();
   });
 
+  it("relaxedQueries убирает по одному слову, начиная с длинных", () => {
+    expect(relaxedQueries("outliers gladwel")).toEqual(["gladwel", "outliers"]);
+    expect(relaxedQueries("selfish gene dawkin")).toEqual([
+      "gene dawkin",
+      "selfish gene",
+      "selfish dawkin",
+    ]);
+    expect(relaxedQueries("the lean statup")).toEqual(["lean", "statup"]);
+    expect(relaxedQueries("sapiens")).toEqual([]);
+    expect(relaxedQueries("a b c d e")).toHaveLength(3);
+  });
+
   it("searchPath кодирует запрос и просит название на нужном языке", () => {
     const url = new URL(searchPath("Мастер и Маргарита", "ru"), "https://example.org");
     expect(url.pathname).toBe("/search.json");
@@ -38,7 +57,11 @@ describe("подготовка запроса", () => {
 describe("searchBooks", () => {
   it("находит книгу одним запросом и уверен в результате", async () => {
     const { client, paths } = fakeClient([[isSearch, fixture("search-sapiens.json")]]);
-    const outcome = await searchBooks("  Sapiens,   Harari ", { client, suggest: null });
+    const outcome = await searchBooks("  Sapiens,   Harari ", {
+      client,
+      suggest: null,
+      cache: null,
+    });
 
     expect(outcome.query).toBe("Sapiens, Harari");
     expect(outcome.strategy).toBe("exact");
@@ -49,27 +72,29 @@ describe("searchBooks", () => {
     expect(queryOf(paths[0])).toBe("Sapiens Harari");
   });
 
-  it("при опечатке повторяет поиск нечётко", async () => {
+  it("слово с опечаткой: ищет по остальным словам и выбирает нужную книгу", async () => {
     const { client, paths } = fakeClient([
       [
-        (path) => isSearch(path) && queryOf(path).includes("~"),
+        (path) => isSearch(path) && queryOf(path) === "harari",
         fixture("search-sapiens.json"),
       ],
       [isSearch, empty],
     ]);
     const suggest = vi.fn();
-    const outcome = await searchBooks("sapeins harrari", { client, suggest });
+    const outcome = await searchBooks("sapeins harari", { client, suggest, cache: null });
 
-    expect(paths.map(queryOf)).toEqual(["sapeins harrari", "sapeins~ harrari~"]);
+    expect(paths.map(queryOf)).toEqual(["sapeins harari", "harari"]);
+    expect(new URL(paths[1], "https://e.org").searchParams.get("limit")).toBe("50");
     expect(outcome.strategy).toBe("fuzzy");
     expect(outcome.candidates[0].workId).toBe("OL17075811W");
-    // Нечёткий поиск справился — запасной источник не тревожим.
+    expect(outcome.candidates[0].matched).toBe(1);
+    // Справились сами — запасные источники не тревожим.
     expect(suggest).not.toHaveBeenCalled();
-    // После исправления не утверждаем, что уверены.
+    // После ослабления запроса не утверждаем, что уверены.
     expect(outcome.confidence).toBe("medium");
   });
 
-  it("если и нечёткий поиск пуст, берёт исправленное название у запасного источника", async () => {
+  it("если каталог ничего не дал, берёт исправленное название у запасного источника", async () => {
     const { client, paths } = fakeClient([
       [
         (path) => isSearch(path) && queryOf(path).includes("Philosopher"),
@@ -81,10 +106,16 @@ describe("searchBooks", () => {
       title: "Harry Potter and the Philosopher's Stone",
       author: "J. K. Rowling",
     });
-    const outcome = await searchBooks("garry poter", { client, suggest });
+    const outcome = await searchBooks("garry poter", { client, suggest, cache: null });
 
     expect(suggest).toHaveBeenCalledWith("garry poter");
-    expect(paths).toHaveLength(3);
+    expect(paths.map(queryOf)).toEqual([
+      "garry poter",
+      "poter",
+      "garry",
+      "garry~ poter~",
+      "Harry Potter and the Philosopher's Stone J K Rowling",
+    ]);
     expect(outcome.strategy).toBe("corrected");
     expect(outcome.correctedQuery).toBe(
       "Harry Potter and the Philosopher's Stone J K Rowling",
@@ -92,23 +123,88 @@ describe("searchBooks", () => {
     expect(outcome.candidates[0].workId).toBe("OL82563W");
   });
 
+  it("русское название без русского издания в каталоге находит через перевод", async () => {
+    const { client } = fakeClient([
+      [
+        (path) => isSearch(path) && queryOf(path).startsWith("Atomic Habits"),
+        fixture("search-atomic.json"),
+      ],
+      [isSearch, empty],
+    ]);
+    const suggest = vi
+      .fn()
+      .mockResolvedValue({ title: "Atomic Habits", author: "James Clear" });
+    const outcome = await searchBooks("Атомные привычки", {
+      client,
+      suggest,
+      cache: null,
+    });
+
+    expect(outcome.strategy).toBe("corrected");
+    expect(outcome.correctedQuery).toBe("Atomic Habits James Clear");
+    expect(outcome.candidates.map((item) => item.title)).toEqual([
+      "Atomic Habits",
+      "Workbook for Atomic Habits",
+    ]);
+  });
+
+  it("подсказка, которая ничего не находит, не затирает имеющиеся результаты", async () => {
+    const { client } = fakeClient([
+      [
+        (path) => isSearch(path) && queryOf(path) === "gift zzz",
+        fixture("search-gift.json"),
+      ],
+      [isSearch, empty],
+    ]);
+    const suggest = vi
+      .fn()
+      .mockResolvedValue({ title: "Совсем другое", author: "Никто" });
+    const outcome = await searchBooks("gift zzz", { client, suggest, cache: null });
+    expect(outcome.strategy).toBe("exact");
+    expect(outcome.correctedQuery).toBeUndefined();
+    expect(outcome.candidates).toHaveLength(3);
+  });
+
+  it("готовый результат запоминается: повторный поиск никуда не обращается", async () => {
+    const { client, paths } = fakeClient([[isSearch, empty]]);
+    const suggest = vi.fn().mockResolvedValue(null);
+    const cache = new MemoryCache();
+
+    await searchBooks("zzzzqqq", { client, suggest, cache });
+    const callsAfterFirst = paths.length;
+    const again = await searchBooks("  ZZZZQQQ ", { client, suggest, cache });
+
+    expect(paths.length).toBe(callsAfterFirst);
+    expect(suggest).toHaveBeenCalledTimes(1);
+    // Запрос в ответе — тот, что ввёл пользователь сейчас.
+    expect(again.query).toBe("ZZZZQQQ");
+  });
+
   it("ничего не нашлось нигде — пустой результат без ошибки", async () => {
     const { client } = fakeClient([[isSearch, empty]]);
-    const outcome = await searchBooks("zzzzqqq", { client, suggest: async () => null });
+    const outcome = await searchBooks("zzzzqqq", {
+      client,
+      suggest: async () => null,
+      cache: null,
+    });
     expect(outcome.candidates).toEqual([]);
     expect(outcome.confidence).toBe("low");
   });
 
   it("запрос из одних знаков не уходит в каталог", async () => {
     const { client, paths } = fakeClient([[isSearch, empty]]);
-    const outcome = await searchBooks("?!…", { client, suggest: null });
+    const outcome = await searchBooks("?!…", { client, suggest: null, cache: null });
     expect(outcome.candidates).toEqual([]);
     expect(paths).toEqual([]);
   });
 
   it("для кириллицы просит русские названия", async () => {
     const { client, paths } = fakeClient([[isSearch, fixture("search-master.json")]]);
-    const outcome = await searchBooks("Мастер и Маргарита", { client, suggest: null });
+    const outcome = await searchBooks("Мастер и Маргарита", {
+      client,
+      suggest: null,
+      cache: null,
+    });
     expect(new URL(paths[0], "https://e.org").searchParams.get("lang")).toBe("ru");
     expect(outcome.candidates[0].title).toBe("Мастер и Маргарита");
     expect(outcome.candidates[0].authors[0]).toBe("Михаил Афанасьевич Булгаков");
@@ -119,7 +215,7 @@ describe("searchBooks", () => {
       [isSearch, new CatalogError("unavailable", "нет ответа")],
     ]);
     await expect(
-      searchBooks("sapiens", { client, suggest: null }),
+      searchBooks("sapiens", { client, suggest: null, cache: null }),
     ).rejects.toBeInstanceOf(CatalogError);
   });
 
@@ -130,7 +226,7 @@ describe("searchBooks", () => {
       author_name: [`Author ${index}`],
     }));
     const { client } = fakeClient([[isSearch, { docs }]]);
-    const outcome = await searchBooks("dune", { client, suggest: null });
+    const outcome = await searchBooks("dune", { client, suggest: null, cache: null });
     expect(outcome.candidates).toHaveLength(10);
   });
 });

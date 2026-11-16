@@ -1,0 +1,24 @@
+{
+  "numFound": 2,
+  "start": 0,
+  "docs": [
+    {
+      "key": "/works/OL17930368W",
+      "title": "Atomic Habits",
+      "subtitle": "An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "author_name": ["James Clear"],
+      "first_publish_year": 2016,
+      "edition_count": 62,
+      "cover_i": 12539702,
+      "language": ["eng", "spa", "rus"]
+    },
+    {
+      "key": "/works/OL20000030W",
+      "title": "Workbook for Atomic Habits",
+      "author_name": ["Growth Hack Books"],
+      "first_publish_year": 2020,
+      "edition_count": 1,
+      "language": ["eng"]
+    }
+  ]
+}
