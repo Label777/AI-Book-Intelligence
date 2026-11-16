@@ -1,18 +1,13 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { expectNoHorizontalScroll, stubCovers } from "./helpers";
+
+test.beforeEach(async ({ page }) => {
+  await stubCovers(page);
+});
 
 const WIDTHS = [360, 768, 1280, 1920] as const;
 const THEMES = ["light", "dark"] as const;
-
-async function expectNoHorizontalScroll(page: Page) {
-  const overflow = await page.evaluate(
-    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
-  );
-  expect(
-    overflow,
-    "страница не должна прокручиваться по горизонтали",
-  ).toBeLessThanOrEqual(0);
-}
 
 for (const theme of THEMES) {
   for (const width of WIDTHS) {
@@ -89,9 +84,10 @@ test("поиск ведёт на страницу результатов", async
   await expect(
     page.getByRole("heading", { level: 1, name: "Поиск книги" }),
   ).toBeVisible();
-  await expect(page.getByText("«Сапиенс Харари»")).toBeVisible();
   await expect(page.getByRole("searchbox")).toHaveValue("Сапиенс Харари");
-  await expect(page.getByText("Каталог книг ещё не подключён")).toBeVisible();
+  await expect(
+    page.getByText("По запросу «Сапиенс Харари» ничего не найдено"),
+  ).toBeVisible();
 });
 
 test("пустой запрос и запрос из пробелов не отправляются", async ({ page }) => {
@@ -262,8 +258,8 @@ test("в консоли нет ошибок", async ({ page }) => {
   page.on("pageerror", (error) => errors.push(error.message));
 
   await page.goto("/");
-  await page.getByRole("searchbox").fill("Сапиенс");
+  await page.getByRole("searchbox").fill("zzzzqqq");
   await page.getByRole("searchbox").press("Enter");
-  await expect(page.getByText("Каталог книг ещё не подключён")).toBeVisible();
+  await expect(page.getByText("По запросу «zzzzqqq» ничего не найдено")).toBeVisible();
   expect(errors).toEqual([]);
 });

@@ -1,0 +1,29 @@
+{
+  "description": "From a renowned historian comes a groundbreaking narrative of humanity’s creation and evolution—a #1 international bestseller—that explores the ways in which biology and history have defined us and enhanced our understanding of what it means to be “human.”\r\n\r\nOne hundred thousand years ago, at least six different species of humans inhabited Earth.",
+  "title": "Sapiens",
+  "key": "/works/OL17075811W",
+  "authors": [
+    { "author": { "key": "/authors/OL3778242A" }, "type": { "key": "/type/author_role" } }
+  ],
+  "type": { "key": "/type/work" },
+  "subjects": [
+    "Technology and civilization",
+    "Human beings",
+    "Historia universal",
+    "Civilization",
+    "World history",
+    "History",
+    "SCIENCE / Life Sciences / General",
+    "nyt:combined-print-and-e-book-nonfiction=2015-03-01",
+    "Cb113.h4 h3713 2015",
+    "599.9",
+    "Anthropology",
+    "Evolution"
+  ],
+  "covers": [8634250, 7387235, -1],
+  "subtitle": "A Brief History of Humankind",
+  "latest_revision": 32,
+  "revision": 32,
+  "created": { "type": "/type/datetime", "value": "2014-11-27T11:53:56.848815" },
+  "last_modified": { "type": "/type/datetime", "value": "2026-02-16T21:39:36.884949" }
+}

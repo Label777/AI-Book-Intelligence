@@ -1,0 +1,39 @@
+{
+  "numFound": 3,
+  "start": 0,
+  "numFoundExact": true,
+  "docs": [
+    {
+      "key": "/works/OL676009W",
+      "title": "Мастер и Маргарита",
+      "author_name": ["Михаил Афанасьевич Булгаков", "Mikhail Bulgakov"],
+      "first_publish_year": 1967,
+      "edition_count": 420,
+      "cover_i": 9255229,
+      "language": ["rus", "eng", "ger"],
+      "editions": {
+        "numFound": 60,
+        "start": 0,
+        "numFoundExact": true,
+        "docs": [{ "title": "Мастер и Маргарита", "language": ["rus"] }]
+      }
+    },
+    {
+      "key": "/works/OL20000010W",
+      "title": "Мастер и Маргарита. Театральный роман",
+      "author_name": ["Михаил Афанасьевич Булгаков"],
+      "first_publish_year": 1988,
+      "edition_count": 6,
+      "language": ["rus"]
+    },
+    {
+      "key": "/works/OL20000011W",
+      "title": "Булгаков. «Мастер и Маргарита»: комментарий",
+      "author_name": ["Лесскис, Георгий Александрович"],
+      "first_publish_year": 2007,
+      "edition_count": 1,
+      "language": ["rus"]
+    }
+  ],
+  "q": "Мастер и Маргарита"
+}
