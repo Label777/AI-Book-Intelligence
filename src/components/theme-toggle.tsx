@@ -1,10 +1,16 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { getTheme, setTheme, subscribeToTheme, type Theme } from "@/lib/theme";
+import {
+  DEFAULT_THEME,
+  getTheme,
+  setTheme,
+  subscribeToTheme,
+  type Theme,
+} from "@/lib/theme";
 
-// На сервере тема неизвестна; после гидрации значение берётся из документа.
-const getServerTheme = (): Theme => "light";
+// На сервере выбор пользователя неизвестен; после гидрации значение берётся из документа.
+const getServerTheme = (): Theme => DEFAULT_THEME;
 
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribeToTheme, getTheme, getServerTheme);

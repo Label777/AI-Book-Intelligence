@@ -1,12 +1,12 @@
 export type Theme = "light" | "dark";
 
 export const THEME_STORAGE_KEY = "theme";
+export const DEFAULT_THEME: Theme = "dark";
 const THEME_EVENT = "abi:theme-change";
-const DARK_QUERY = "(prefers-color-scheme: dark)";
 
 /**
  * Выполняется в <head> до первой отрисовки: применяет сохранённый выбор темы.
- * Если выбора нет, атрибут не ставится и тема следует системной настройке (см. tokens.css).
+ * Если выбора нет, атрибут не ставится и действует основная тема — тёмная (см. tokens.css).
  */
 export const themeInitScript = `(function(){try{var t=localStorage.getItem(${JSON.stringify(
   THEME_STORAGE_KEY,
@@ -16,11 +16,10 @@ function isTheme(value: unknown): value is Theme {
   return value === "light" || value === "dark";
 }
 
-/** Действующая тема: явный выбор пользователя либо системная настройка. */
+/** Действующая тема: явный выбор пользователя либо основная. */
 export function getTheme(): Theme {
   const chosen = document.documentElement.dataset.theme;
-  if (isTheme(chosen)) return chosen;
-  return window.matchMedia(DARK_QUERY).matches ? "dark" : "light";
+  return isTheme(chosen) ? chosen : DEFAULT_THEME;
 }
 
 export function setTheme(theme: Theme): void {
@@ -33,19 +32,16 @@ export function setTheme(theme: Theme): void {
   window.dispatchEvent(new Event(THEME_EVENT));
 }
 
-/** Подписка для useSyncExternalStore: смена темы кнопкой, системой или в другой вкладке. */
+/** Подписка для useSyncExternalStore: смена темы кнопкой или в другой вкладке. */
 export function subscribeToTheme(onChange: () => void): () => void {
-  const media = window.matchMedia(DARK_QUERY);
   const onStorage = (event: StorageEvent) => {
     if (event.key !== THEME_STORAGE_KEY) return;
     if (isTheme(event.newValue)) document.documentElement.dataset.theme = event.newValue;
     onChange();
   };
-  media.addEventListener("change", onChange);
   window.addEventListener(THEME_EVENT, onChange);
   window.addEventListener("storage", onStorage);
   return () => {
-    media.removeEventListener("change", onChange);
     window.removeEventListener(THEME_EVENT, onChange);
     window.removeEventListener("storage", onStorage);
   };

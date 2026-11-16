@@ -1,22 +1,22 @@
 /*
  * Дизайн-токены из docs/02-ux-ui.md, раздел 7.
  * Каждое цветовое значение — пара light-dark(светлая, тёмная).
- * Тема следует системной настройке, пока пользователь не выбрал её сам:
- * тогда на <html> появляется data-theme="light" или "dark".
+ * Тёмная тема — основная и включена по умолчанию (docs/05-focus-and-mvp.md).
+ * Когда пользователь выбирает тему сам, на <html> появляется data-theme="light" или "dark".
  * Контраст пар проверяется тестом tests/unit/tokens.test.ts.
  */
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
 
-  --bg: light-dark(#fafaf7, #0e0e10);
-  --surface: light-dark(#ffffff, #17171a);
-  --surface-2: light-dark(#f2f1ec, #1f1f23);
-  --border: light-dark(#e4e2da, #2a2a30);
-  --border-strong: light-dark(#85837a, #7b7a85);
+  --bg: light-dark(#fafaf7, #0d0e12);
+  --surface: light-dark(#ffffff, #16181d);
+  --surface-2: light-dark(#f2f1ec, #1e2027);
+  --border: light-dark(#e4e2da, #2a2d36);
+  --border-strong: light-dark(#85837a, #7c7f8c);
   --text: light-dark(#16161a, #f2f2ee);
   --text-2: light-dark(#5c5b63, #a3a2ab);
   --accent: light-dark(#3b4edb, #8b9bff);
-  --on-accent: light-dark(#ffffff, #0e0e10);
+  --on-accent: light-dark(#ffffff, #0d0e12);
 
   --src-book: light-dark(#1f7a5a, #5fd3a6);
   --src-ai: light-dark(#6b4bd8, #b39dff);

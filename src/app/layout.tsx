@@ -9,18 +9,15 @@ import { themeInitScript } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: {
-    default: "AI Book Intelligence — книга как презентация с источниками",
+    default: "AI Book Intelligence — знания из книги, а не пересказ",
     template: "%s · AI Book Intelligence",
   },
   description:
-    "Введите название книги и автора — AI соберёт презентацию: саммари, идеи, критику и план внедрения. У каждого утверждения видно, откуда оно взято.",
+    "Введите название книги и автора — AI разберёт идеи, покажет слабые места, свяжет книгу с другими и предложит план действий. У каждого утверждения видно, откуда оно взято.",
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e0e10" },
-  ],
+  themeColor: "#0d0e12",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

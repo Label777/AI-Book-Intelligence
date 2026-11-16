@@ -17,7 +17,11 @@ async function expectNoHorizontalScroll(page: Page) {
 for (const theme of THEMES) {
   for (const width of WIDTHS) {
     test(`главная: ${width} px, ${theme}`, async ({ page }, testInfo) => {
-      await page.emulateMedia({ colorScheme: theme, reducedMotion: "reduce" });
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      // Тёмная тема действует по умолчанию; светлая — сохранённый выбор пользователя.
+      if (theme === "light") {
+        await page.addInitScript(() => localStorage.setItem("theme", "light"));
+      }
       await page.setViewportSize({ width, height: width < 768 ? 740 : 900 });
       await page.goto("/");
       await page.evaluate(() => document.fonts.ready);
@@ -38,7 +42,7 @@ for (const theme of THEMES) {
         () => getComputedStyle(document.documentElement).backgroundColor,
       );
       expect(background).toBe(
-        theme === "dark" ? "rgb(14, 14, 16)" : "rgb(250, 250, 247)",
+        theme === "dark" ? "rgb(13, 14, 18)" : "rgb(250, 250, 247)",
       );
 
       // Контраст и остальные правила WCAG 2.1 AA.
@@ -140,7 +144,7 @@ test("вся главная проходится с клавиатуры", async
     "AI Book Intelligence",
     "Как это работает",
     "Источники",
-    "Включить тёмную тему",
+    "Включить светлую тему",
     "q",
     "Создать анализ",
   ]);
@@ -185,7 +189,9 @@ test("ссылки шапки ведут к разделам, логотип —
   await page.goto("/search?q=test");
   await page.getByRole("link", { name: "AI Book Intelligence" }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Любая книга");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Не пересказ книги",
+  );
 
   await page.goto("/search?q=test");
   await page.getByRole("link", { name: "← На главную" }).click();
@@ -203,33 +209,18 @@ test("несуществующий адрес показывает страни�
 });
 
 test.describe("тема", () => {
-  test("следует системной настройке, пока пользователь не выбрал сам", async ({
-    page,
-  }) => {
-    await page.emulateMedia({ colorScheme: "dark" });
+  test("по умолчанию тёмная, какой бы ни была системная настройка", async ({ page }) => {
+    await page.emulateMedia({ colorScheme: "light" });
     await page.goto("/");
     await expect(page.locator("html")).not.toHaveAttribute("data-theme", /.+/);
+    await expect(page.locator("html")).toHaveCSS("background-color", "rgb(13, 14, 18)");
     await expect(
       page.getByRole("button", { name: "Включить светлую тему" }),
-    ).toBeVisible();
-
-    await page.emulateMedia({ colorScheme: "light" });
-    await expect(
-      page.getByRole("button", { name: "Включить тёмную тему" }),
     ).toBeVisible();
   });
 
   test("переключается кнопкой и сохраняется после перезагрузки", async ({ page }) => {
-    await page.emulateMedia({ colorScheme: "light" });
     await page.goto("/");
-
-    await page.getByRole("button", { name: "Включить тёмную тему" }).click();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-    await expect(page.locator("html")).toHaveCSS("background-color", "rgb(14, 14, 16)");
-
-    await page.reload();
-    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-    await expect(page.locator("html")).toHaveCSS("background-color", "rgb(14, 14, 16)");
 
     await page.getByRole("button", { name: "Включить светлую тему" }).click();
     await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
@@ -237,6 +228,29 @@ test.describe("тема", () => {
       "background-color",
       "rgb(250, 250, 247)",
     );
+
+    await page.reload();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+    await expect(page.locator("html")).toHaveCSS(
+      "background-color",
+      "rgb(250, 250, 247)",
+    );
+
+    await page.getByRole("button", { name: "Включить тёмную тему" }).click();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    await expect(page.locator("html")).toHaveCSS("background-color", "rgb(13, 14, 18)");
+  });
+
+  test("у переключателя виден ровно один значок, соответствующий теме", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(page.locator(".theme-icon-sun")).toBeVisible();
+    await expect(page.locator(".theme-icon-moon")).toBeHidden();
+
+    await page.getByRole("button", { name: "Включить светлую тему" }).click();
+    await expect(page.locator(".theme-icon-moon")).toBeVisible();
+    await expect(page.locator(".theme-icon-sun")).toBeHidden();
   });
 });
 

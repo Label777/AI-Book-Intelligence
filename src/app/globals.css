@@ -139,27 +139,17 @@
   }
 }
 
-/* Значок переключателя темы: луна в светлой теме, солнце в тёмной. */
+/* Значок переключателя темы: в тёмной теме (по умолчанию) — солнце, в светлой — луна. */
 @layer components {
-  .theme-icon-sun {
+  .theme-icon-moon {
     display: none;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .theme-icon-moon {
-      display: none;
-    }
-
-    :root:not([data-theme="light"]) .theme-icon-sun {
-      display: block;
-    }
-  }
-
-  :root[data-theme="dark"] .theme-icon-moon {
-    display: none;
-  }
-
-  :root[data-theme="dark"] .theme-icon-sun {
+  :root[data-theme="light"] .theme-icon-moon {
     display: block;
+  }
+
+  :root[data-theme="light"] .theme-icon-sun {
+    display: none;
   }
 }
