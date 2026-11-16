@@ -131,6 +131,19 @@ test("опечатка: запасной источник подсказывае
   ).toBeVisible();
 });
 
+test("русское название переводится, если в каталоге нет русского издания", async ({
+  page,
+}) => {
+  await page.goto(`/search?q=${encodeURIComponent("Атомные привычки")}`);
+  await expect(
+    page.getByText("Точного совпадения с «Атомные привычки» нет."),
+  ).toBeVisible();
+  await expect(page.getByText("«Atomic Habits James Clear»")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 3 }).first()).toHaveText(
+    "Atomic Habits",
+  );
+});
+
 test("кириллица: название показано по-русски", async ({ page }) => {
   await page.goto(`/search?q=${encodeURIComponent("Мастер и Маргарита")}`);
   await expect(

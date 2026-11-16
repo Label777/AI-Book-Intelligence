@@ -132,9 +132,16 @@ export function createCatalogClient(options: CatalogClientOptions = {}): Catalog
 // Один клиент на процесс: общий кэш и общая очередь запросов.
 const globalStore = globalThis as typeof globalThis & {
   __abiCatalogClient?: CatalogClient;
+  __abiCatalogCache?: CacheStore;
 };
 
+/** Общий кэш процесса: ответы каталога и готовые результаты поиска. */
+export function getCatalogCache(): CacheStore {
+  globalStore.__abiCatalogCache ??= new MemoryCache();
+  return globalStore.__abiCatalogCache;
+}
+
 export function getCatalogClient(): CatalogClient {
-  globalStore.__abiCatalogClient ??= createCatalogClient();
+  globalStore.__abiCatalogClient ??= createCatalogClient({ cache: getCatalogCache() });
   return globalStore.__abiCatalogClient;
 }

@@ -13,7 +13,11 @@ function matches(candidate: RankedCandidate, testCase: EvalCase): boolean {
   const authorTokens = tokenize(candidate.authors.join(" "));
   return (
     !isDerivative(candidate.title) &&
-    titleTokens.some((token) => tokensMatch(testCase.title, token)) &&
+    titleTokens.some(
+      (token) =>
+        tokensMatch(testCase.title, token) ||
+        (testCase.titleEn !== undefined && tokensMatch(testCase.titleEn, token)),
+    ) &&
     authorTokens.some((token) => tokensMatch(testCase.author, token))
   );
 }
@@ -35,7 +39,7 @@ it("живой поиск: нужная книга в первой тройке 
     let outcome: SearchOutcome | undefined;
     let error: string | undefined;
     try {
-      outcome = await searchBooks(testCase.query);
+      outcome = await searchBooks(testCase.query, { cache: null });
     } catch (cause) {
       error = cause instanceof Error ? `${cause.name}: ${cause.message}` : String(cause);
     }

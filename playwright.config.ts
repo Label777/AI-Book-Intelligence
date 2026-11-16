@@ -39,7 +39,11 @@ export default defineConfig({
     {
       command: `npm run start -- --port ${PORT}`,
       url: baseURL,
-      env: { OPEN_LIBRARY_BASE_URL: MOCK_CATALOG, GOOGLE_BOOKS_BASE_URL: MOCK_CATALOG },
+      env: {
+        OPEN_LIBRARY_BASE_URL: MOCK_CATALOG,
+        GOOGLE_BOOKS_BASE_URL: MOCK_CATALOG,
+        WIKIDATA_BASE_URL: MOCK_CATALOG,
+      },
       reuseExistingServer: !process.env.CI,
       timeout: 60_000,
     },

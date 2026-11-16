@@ -15,11 +15,16 @@ export interface BookCandidate {
 export interface RankedCandidate extends BookCandidate {
   /** Оценка соответствия запросу, 0–1. */
   score: number;
+  /** Какая доля слов запроса нашлась в названии и авторах, 0–1. */
+  matched: number;
 }
 
 export type Confidence = "high" | "medium" | "low";
 
-/** Как был получен результат: по запросу как есть, нечётким поиском или после исправления. */
+/**
+ * Как был получен результат: по запросу как есть, по ослабленному запросу (часть слов
+ * с опечатками) или по названию, исправленному или переведённому запасным источником.
+ */
 export type SearchStrategy = "exact" | "fuzzy" | "corrected";
 
 export interface SearchOutcome {

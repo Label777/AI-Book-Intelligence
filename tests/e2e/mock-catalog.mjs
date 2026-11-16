@@ -17,7 +17,8 @@ function searchFixture(q) {
   if (text.startsWith("key:/works/ol17075811w")) return "search-key-sapiens.json";
   if (text.startsWith("key:")) return "search-empty.json";
   if (text.includes("philosopher")) return "search-potter.json";
-  if (text.includes("sapiens") || text.includes("sapeins~")) return "search-sapiens.json";
+  if (text.includes("atomic habits")) return "search-atomic.json";
+  if (text.includes("sapiens") || text === "harari") return "search-sapiens.json";
   if (text.includes("мастер")) return "search-master.json";
   if (text.includes("gift")) return "search-gift.json";
   return "search-empty.json";
@@ -56,6 +57,42 @@ const server = createServer((request, response) => {
   if (url.pathname === "/authors/OL3778242A.json")
     return send(200, load("author-OL3778242A.json"));
   if (url.pathname === "/works/OL503W.json") return send(503, "{}");
+
+  // Wikidata: переводит «Атомные привычки» в «Atomic Habits» и называет автора.
+  if (url.pathname === "/w/api.php") {
+    const action = url.searchParams.get("action");
+    if (action === "wbsearchentities") {
+      const found = (url.searchParams.get("search") ?? "").includes("атомные");
+      return send(
+        200,
+        JSON.stringify({ search: found ? [{ id: "Q100" }, { id: "Q101" }] : [] }),
+      );
+    }
+    if (url.searchParams.get("ids") === "Q100|Q101") {
+      return send(
+        200,
+        JSON.stringify({
+          entities: {
+            // Первая находка — не книга (нет автора), вторая — книга.
+            Q100: { labels: { en: { value: "Atomic Habits (film)" } }, claims: {} },
+            Q101: {
+              labels: { en: { value: "Atomic Habits" } },
+              claims: { P50: [{ mainsnak: { datavalue: { value: { id: "Q102" } } } }] },
+            },
+          },
+        }),
+      );
+    }
+    if (url.searchParams.get("ids") === "Q102") {
+      return send(
+        200,
+        JSON.stringify({
+          entities: { Q102: { labels: { en: { value: "James Clear" } } } },
+        }),
+      );
+    }
+    return send(200, "{}");
+  }
 
   // Google Books: исправляет опечатку в «garry poter».
   if (url.pathname === "/books/v1/volumes") {

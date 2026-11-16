@@ -57,19 +57,24 @@ function popularity(editionCount: number | undefined): number {
   return Math.min(1, Math.log10(1 + (editionCount ?? 1)) / 2.3);
 }
 
+interface Score {
+  score: number;
+  matched: number;
+}
+
 export function scoreCandidate(
   candidate: BookCandidate,
   query: string,
   position: number,
   total: number,
-): number {
+): Score {
   const queryTokens = tokenize(query);
   const titleTokens = tokenize([candidate.title, candidate.subtitle ?? ""].join(" "));
   const mainTitleTokens = tokenize(candidate.title);
   const authorTokens = tokenize(candidate.authors.join(" "));
 
   // Насколько запрос объясняется названием и автором…
-  const queryCovered = coverage(queryTokens, [...titleTokens, ...authorTokens]);
+  const matched = coverage(queryTokens, [...titleTokens, ...authorTokens]);
   // …и насколько название объясняется запросом: «Сапиенс» ближе к запросу «сапиенс»,
   // чем «Краткое содержание книги „Сапиенс“ за 30 минут».
   const titleCovered = coverage(mainTitleTokens, queryTokens);
@@ -77,14 +82,14 @@ export function scoreCandidate(
   const catalogOrder = total > 1 ? 1 - position / (total - 1) : 1;
 
   let score =
-    0.45 * queryCovered +
+    0.45 * matched +
     0.2 * titleCovered +
     0.2 * popularity(candidate.editionCount) +
     0.15 * catalogOrder;
 
   // Пересказ опускаем, если искали не его; если искали именно пересказ — поднимаем.
   if (isDerivative(candidate.title)) score += isDerivative(query) ? 0.25 : -0.35;
-  return Math.max(0, Math.min(1, score));
+  return { score: Math.max(0, Math.min(1, score)), matched };
 }
 
 export function rankCandidates(
@@ -94,9 +99,16 @@ export function rankCandidates(
   return candidates
     .map((candidate, index) => ({
       ...candidate,
-      score: scoreCandidate(candidate, query, index, candidates.length),
+      ...scoreCandidate(candidate, query, index, candidates.length),
     }))
     .sort((a, b) => b.score - a.score);
+}
+
+/** Сильное совпадение: первый результат — не пересказ, и в нём нашлись все слова запроса. */
+export function isStrongMatch(ranked: RankedCandidate[], query: string): boolean {
+  const [first] = ranked;
+  if (!first) return false;
+  return first.matched === 1 && (!isDerivative(first.title) || isDerivative(query));
 }
 
 /**
