@@ -231,6 +231,7 @@ test.describe("телефон", () => {
 
   test("области нажатия не меньше 44 px", async ({ page }) => {
     await page.goto(DEMO);
+    await expect(page.locator("[data-slide]")).toHaveCount(15);
     const targets = page.locator("main button:visible, main a:visible");
     const count = await targets.count();
     expect(count).toBeGreaterThan(50);
