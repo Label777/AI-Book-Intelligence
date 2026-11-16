@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "thinking-fast-and-slow",
+    "title": "Thinking, Fast and Slow",
+    "authors": ["Daniel Kahneman"],
+    "firstPublishYear": 2011,
+    "subjects": ["Psychology"]
+  },
+  {
+    "slug": "atomic-habits",
+    "title": "Atomic Habits",
+    "authors": ["James Clear"],
+    "firstPublishYear": 2018,
+    "subjects": ["Self-help"]
+  },
+  {
+    "slug": "sapiens",
+    "title": "Sapiens: A Brief History of Humankind",
+    "authors": ["Yuval Noah Harari"],
+    "firstPublishYear": 2011,
+    "subjects": ["History"]
+  },
+  {
+    "slug": "the-lean-startup",
+    "title": "The Lean Startup",
+    "authors": ["Eric Ries"],
+    "firstPublishYear": 2011,
+    "subjects": ["Business"]
+  },
+  {
+    "slug": "deep-work",
+    "title": "Deep Work",
+    "authors": ["Cal Newport"],
+    "firstPublishYear": 2016,
+    "subjects": ["Productivity"]
+  },
+  {
+    "slug": "the-psychology-of-money",
+    "title": "The Psychology of Money",
+    "authors": ["Morgan Housel"],
+    "firstPublishYear": 2020,
+    "subjects": ["Personal finance"]
+  },
+  {
+    "slug": "rich-dad-poor-dad",
+    "title": "Rich Dad Poor Dad",
+    "authors": ["Robert T. Kiyosaki"],
+    "firstPublishYear": 1997,
+    "subjects": ["Personal finance"]
+  },
+  {
+    "slug": "mans-search-for-meaning",
+    "title": "Man's Search for Meaning",
+    "authors": ["Viktor E. Frankl"],
+    "firstPublishYear": 1946,
+    "subjects": ["Psychology", "Memoir"]
+  },
+  {
+    "slug": "the-selfish-gene",
+    "title": "The Selfish Gene",
+    "authors": ["Richard Dawkins"],
+    "firstPublishYear": 1976,
+    "subjects": ["Biology"]
+  },
+  {
+    "slug": "zero-to-one",
+    "title": "Zero to One",
+    "authors": ["Peter Thiel", "Blake Masters"],
+    "firstPublishYear": 2014,
+    "subjects": ["Business"]
+  }
+]
