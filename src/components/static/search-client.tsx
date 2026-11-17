@@ -6,7 +6,7 @@ import { searchBooks } from "@/books/search";
 import { CatalogError } from "@/books/types";
 import { SearchForm } from "@/components/search-form";
 import { Results, SearchFailed } from "@/components/search-results";
-import { useAsync } from "@/components/static/use-async";
+import { useAsync } from "@/components/use-async";
 import { BookCardSkeleton } from "@/components/ui/skeleton";
 
 /** Поиск в статической сборке: браузер сам обращается к каталогу. */

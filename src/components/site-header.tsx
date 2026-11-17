@@ -4,6 +4,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
   { href: "/#how", label: "Как это работает" },
+  { href: "/#libraries", label: "Библиотеки" },
   { href: "/#sources", label: "Источники" },
 ];
 

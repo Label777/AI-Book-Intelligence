@@ -33,6 +33,7 @@ jobs:
           NEXT_PUBLIC_OPEN_LIBRARY_BASE_URL: http://127.0.0.1:3101
           NEXT_PUBLIC_GOOGLE_BOOKS_BASE_URL: http://127.0.0.1:3101
           NEXT_PUBLIC_WIKIDATA_BASE_URL: http://127.0.0.1:3101
+          NEXT_PUBLIC_GUTENDEX_BASE_URL: http://127.0.0.1:3101
         run: npm run build:pages && npm run test:pages
 
       - name: Сборка
@@ -47,3 +48,12 @@ jobs:
           git add -A
           git commit -q -m "Сайт из $GITHUB_SHA"
           git push -q --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gh-pages
+
+      # Проверка выложенного сайта в настоящем браузере: поиск по настоящему каталогу
+      # и наличие книги в библиотеках. Не блокирует публикацию — итог виден в аннотациях.
+      - name: Проверка выложенного сайта
+        continue-on-error: true
+        run: |
+          sleep 90
+          npx playwright test --config playwright.live.config.ts || true
+          node scripts/report-live-check.mjs

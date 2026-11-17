@@ -6,7 +6,9 @@
       "key": "/works/OL17075811W",
       "title": "Sapiens",
       "first_publish_year": 2011,
-      "edition_count": 86
+      "edition_count": 86,
+      "ebook_access": "borrowable",
+      "ia": ["sapiensbriefhist0000hara"]
     }
   ]
 }

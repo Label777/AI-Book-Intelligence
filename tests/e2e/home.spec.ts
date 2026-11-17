@@ -131,7 +131,7 @@ test("вся главная проходится с клавиатуры", async
     });
 
   const order: (string | null | undefined)[] = [];
-  for (let step = 0; step < 7; step += 1) {
+  for (let step = 0; step < 8; step += 1) {
     await page.keyboard.press("Tab");
     order.push(await focused());
   }
@@ -139,6 +139,7 @@ test("вся главная проходится с клавиатуры", async
     "Перейти к содержимому",
     "AI Book Intelligence",
     "Как это работает",
+    "Библиотеки",
     "Источники",
     "Включить светлую тему",
     "q",

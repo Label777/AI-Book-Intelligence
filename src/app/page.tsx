@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import { HowItWorks } from "@/components/home/how-it-works";
+import { LibrariesSection } from "@/components/home/libraries-section";
 import { SourcesSection } from "@/components/home/sources-section";
 
 // Блоки «Примеры», «Популярные книги» и «Моя библиотека» появятся вместе с данными
@@ -9,6 +10,7 @@ export default function HomePage() {
     <>
       <Hero />
       <HowItWorks />
+      <LibrariesSection />
       <SourcesSection />
     </>
   );

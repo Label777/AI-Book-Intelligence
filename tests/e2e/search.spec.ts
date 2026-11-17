@@ -104,6 +104,36 @@ test("выбор издания и фильтр по языку", async ({ page 
   await expect(rows).toHaveCount(5);
 });
 
+test("где читать: найденные копии и поиск в остальных библиотеках", async ({ page }) => {
+  await page.goto("/book/OL17075811W");
+  const section = page.getByRole("region", { name: "Где читать и слушать" });
+  const found = section.getByRole("list", { name: "Найдено в библиотеках" });
+
+  await expect(
+    found.getByRole("link", { name: /Взять почитать на время.*Open Library/ }),
+  ).toHaveAttribute("href", "https://openlibrary.org/works/OL17075811W");
+  await expect(
+    found.getByRole("link", { name: /Читать фрагмент.*Google Books/ }),
+  ).toHaveAttribute("href", "https://books.google.com/books?id=FmyBAwAAQBAJ");
+  await expect(found.getByRole("listitem")).toHaveCount(2);
+
+  // Остальные восемь библиотек — ссылки на поиск именно этой книги.
+  const search = section.locator("[data-library]");
+  await expect(search).toHaveCount(8);
+  await expect(section.locator('[data-library="gutenberg"]')).toHaveAttribute(
+    "href",
+    "https://www.gutenberg.org/ebooks/search/?query=Sapiens%20Yuval%20Noah%20Harari",
+  );
+  await expect(section.locator('[data-library="wikisource"]')).toHaveAttribute(
+    "href",
+    /^https:\/\/en\.wikisource\.org\/w\/index\.php\?search=Sapiens/,
+  );
+  for (const link of await search.all()) {
+    await expect(link).toHaveAttribute("href", /^https:\/\//);
+    await expect(link).toHaveAttribute("rel", "noreferrer");
+  }
+});
+
 test("издание от другой книги в адресе игнорируется", async ({ page }) => {
   await page.goto("/book/OL17075811W?edition=OL99999999M&lang=zzz");
   await expect(page.getByRole("heading", { name: "Издание не выбрано" })).toBeVisible();

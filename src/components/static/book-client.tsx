@@ -11,7 +11,7 @@ import {
   linkClass,
   selectedEditionTitle,
 } from "@/components/book-view";
-import { useAsync } from "@/components/static/use-async";
+import { useAsync } from "@/components/use-async";
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
 import { bookHref, type BookPageState } from "@/lib/routes";
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { languageName } from "@/books/languages";
 import type { BookDetails, Edition } from "@/books/types";
+import { LibraryAccess } from "@/components/library-access";
 import { BookCover } from "@/components/ui/book-cover";
 import { cn } from "@/lib/cn";
 import { plural } from "@/lib/plural";
@@ -231,6 +232,8 @@ export function BookView({ book, state, children }: BookViewProps) {
           ) : null}
         </section>
       ) : null}
+
+      <LibraryAccess book={book} />
 
       <Editions book={book} state={state} />
 

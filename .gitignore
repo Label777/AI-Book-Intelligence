@@ -29,3 +29,4 @@ search-eval.json
 .e2e-store/
 .data/
 .pages-build/
+live-check.json

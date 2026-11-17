@@ -98,9 +98,47 @@ const server = createServer((request, response) => {
     return send(200, "{}");
   }
 
+  // Project Gutenberg (каталог Gutendex): «Sapiens» там нет, «Мастер и Маргарита» — тоже.
+  if (url.pathname === "/books" || url.pathname === "/books/") {
+    const search = (url.searchParams.get("search") ?? "").toLowerCase();
+    if (search.includes("pride")) {
+      return send(
+        200,
+        JSON.stringify({
+          results: [
+            {
+              id: 1342,
+              title: "Pride and Prejudice",
+              authors: [{ name: "Austen, Jane" }],
+            },
+          ],
+        }),
+      );
+    }
+    return send(200, JSON.stringify({ count: 0, results: [] }));
+  }
+
   // Google Books: исправляет опечатку в «garry poter».
   if (url.pathname === "/books/v1/volumes") {
     const q = (url.searchParams.get("q") ?? "").toLowerCase();
+    if (q.includes("intitle:") && q.includes("sapiens")) {
+      return send(
+        200,
+        JSON.stringify({
+          items: [
+            {
+              volumeInfo: {
+                title: "Sapiens",
+                authors: ["Yuval Noah Harari"],
+                previewLink:
+                  "http://books.google.com/books?id=FmyBAwAAQBAJ&printsec=frontcover",
+              },
+              accessInfo: { viewability: "PARTIAL" },
+            },
+          ],
+        }),
+      );
+    }
     if (q.includes("poter")) {
       return send(
         200,

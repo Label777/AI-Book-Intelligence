@@ -30,6 +30,11 @@ test("главная, поиск, страница книги и выбор из
   await expect(page.getByRole("heading", { level: 1, name: "Sapiens" })).toBeVisible();
   await expect(page.getByText("Первая публикация: 2011 · 86 изданий")).toBeVisible();
 
+  // Наличие в библиотеках браузер проверяет сам.
+  const libraries = page.getByRole("region", { name: "Где читать и слушать" });
+  await expect(libraries.locator("[data-found]")).toHaveCount(2);
+  await expect(libraries.locator("[data-library]")).toHaveCount(8);
+
   await page.getByRole("link", { name: "русский", exact: true }).click();
   await page.getByRole("link", { name: /Краткая история человечества/ }).click();
   await expect(page).toHaveURL(
