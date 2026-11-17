@@ -276,9 +276,10 @@ test("страница книги: области нажатия на телеф
 }) => {
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto("/book/OL17075811W?q=sapiens");
-  const targets = page.locator("main a, main summary");
+  await expect(page.getByText("Это та книга?")).toBeVisible();
+  const targets = page.locator("#main").locator("a, summary");
+  await expect.poll(() => targets.count()).toBeGreaterThan(8);
   const count = await targets.count();
-  expect(count).toBeGreaterThan(8);
   for (let index = 0; index < count; index += 1) {
     const box = await targets.nth(index).boundingBox();
     expect(box?.height ?? 0, await targets.nth(index).innerText()).toBeGreaterThanOrEqual(

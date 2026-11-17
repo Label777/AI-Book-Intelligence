@@ -229,7 +229,7 @@ export interface AccessDeps {
 async function getJson(doFetch: typeof fetch, url: string): Promise<unknown> {
   const response = await doFetch(url, {
     // Каталог Gutendex отвечает медленно, поэтому ждём дольше обычного.
-    signal: AbortSignal.timeout(20_000),
+    signal: AbortSignal.timeout(12_000),
     cache: "no-store",
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -237,54 +237,61 @@ async function getJson(doFetch: typeof fetch, url: string): Promise<unknown> {
 }
 
 /**
- * Проверяет наличие книги в библиотеках с программным доступом. Каждая проверка независима:
- * если библиотека не ответила, по ней просто нет результата — остаётся ссылка на поиск.
+ * Проверки наличия книги в библиотеках с программным доступом — по одной на библиотеку.
+ * Они независимы: медленная или недоступная библиотека не задерживает остальные,
+ * по ней просто остаётся ссылка на поиск.
  */
+export const ACCESS_CHECKS: Record<
+  "openlibrary" | "gutenberg" | "google",
+  (book: BookRef, deps?: AccessDeps) => Promise<FoundAccess[]>
+> = {
+  async openlibrary(book, deps = {}) {
+    const params = new URLSearchParams({
+      q: `key:/works/${book.workId}`,
+      fields: "key,ebook_access,ia",
+      limit: "1",
+    });
+    const client = deps.client ?? getCatalogClient();
+    return parseOpenLibraryAccess(await client.getJson(`/search.json?${params}`), book);
+  },
+  async gutenberg(book, deps = {}) {
+    const doFetch = deps.fetch ?? fetch;
+    // Имена переменных написаны полностью: сборщик подставляет NEXT_PUBLIC_* по точному имени.
+    const gutendex = (
+      process.env.NEXT_PUBLIC_GUTENDEX_BASE_URL || "https://gutendex.com"
+    ).replace(/\/+$/, "");
+    const params = new URLSearchParams({ search: text(book) });
+    return parseGutenbergAccess(
+      await getJson(doFetch, `${gutendex}/books/?${params}`),
+      book,
+    );
+  },
+  async google(book, deps = {}) {
+    const doFetch = deps.fetch ?? fetch;
+    const author = book.authors[0] ?? "";
+    const google = (
+      process.env.NEXT_PUBLIC_GOOGLE_BOOKS_BASE_URL || "https://www.googleapis.com"
+    ).replace(/\/+$/, "");
+    const params = new URLSearchParams({
+      q: `intitle:"${book.title}"${author ? ` inauthor:"${author}"` : ""}`,
+      maxResults: "5",
+      printType: "books",
+      fields: "items(volumeInfo(title,authors,previewLink),accessInfo(viewability))",
+    });
+    return parseGoogleAccess(
+      await getJson(doFetch, `${google}/books/v1/volumes?${params}`),
+      book,
+    );
+  },
+};
+
+/** Все проверки разом; сбой одной не мешает остальным. */
 export async function findAccess(
   book: BookRef,
   deps: AccessDeps = {},
 ): Promise<FoundAccess[]> {
-  const doFetch = deps.fetch ?? fetch;
-  const author = book.authors[0] ?? "";
-  // Имена переменных написаны полностью: сборщик подставляет NEXT_PUBLIC_* по точному имени.
-  const gutendex = (
-    process.env.NEXT_PUBLIC_GUTENDEX_BASE_URL || "https://gutendex.com"
-  ).replace(/\/+$/, "");
-  const google = (
-    process.env.NEXT_PUBLIC_GOOGLE_BOOKS_BASE_URL || "https://www.googleapis.com"
-  ).replace(/\/+$/, "");
-
-  const checks: Promise<FoundAccess[]>[] = [
-    (async () => {
-      const params = new URLSearchParams({
-        q: `key:/works/${book.workId}`,
-        fields: "key,ebook_access,ia",
-        limit: "1",
-      });
-      const client = deps.client ?? getCatalogClient();
-      return parseOpenLibraryAccess(await client.getJson(`/search.json?${params}`), book);
-    })(),
-    (async () => {
-      const params = new URLSearchParams({ search: text(book) });
-      return parseGutenbergAccess(
-        await getJson(doFetch, `${gutendex}/books/?${params}`),
-        book,
-      );
-    })(),
-    (async () => {
-      const params = new URLSearchParams({
-        q: `intitle:"${book.title}"${author ? ` inauthor:"${author}"` : ""}`,
-        maxResults: "5",
-        printType: "books",
-        fields: "items(volumeInfo(title,authors,previewLink),accessInfo(viewability))",
-      });
-      return parseGoogleAccess(
-        await getJson(doFetch, `${google}/books/v1/volumes?${params}`),
-        book,
-      );
-    })(),
-  ];
-
-  const settled = await Promise.allSettled(checks);
+  const settled = await Promise.allSettled(
+    Object.values(ACCESS_CHECKS).map((check) => check(book, deps)),
+  );
   return settled.flatMap((result) => (result.status === "fulfilled" ? result.value : []));
 }

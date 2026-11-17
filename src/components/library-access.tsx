@@ -1,6 +1,11 @@
 "use client";
 
-import { findAccess, LIBRARIES, type AccessKind, type BookRef } from "@/books/libraries";
+import {
+  ACCESS_CHECKS,
+  LIBRARIES,
+  type AccessKind,
+  type BookRef,
+} from "@/books/libraries";
 import { useAsync } from "@/components/use-async";
 
 const ACTION: Record<AccessKind, string> = {
@@ -15,8 +20,14 @@ const ACTION: Record<AccessKind, string> = {
  */
 export function LibraryAccess({ book }: { book: BookRef }) {
   const ref: BookRef = { workId: book.workId, title: book.title, authors: book.authors };
-  const state = useAsync(book.workId, () => findAccess(ref));
-  const found = state?.status === "done" ? state.value : [];
+  // Каждая библиотека проверяется отдельно: найденное показываем сразу, не дожидаясь медленных.
+  const checks = [
+    useAsync(book.workId, () => ACCESS_CHECKS.openlibrary(ref)),
+    useAsync(book.workId, () => ACCESS_CHECKS.gutenberg(ref)),
+    useAsync(book.workId, () => ACCESS_CHECKS.google(ref)),
+  ];
+  const found = checks.flatMap((check) => (check?.status === "done" ? check.value : []));
+  const loading = checks.some((check) => check?.status === "loading");
   const foundIds = new Set(found.map((item) => item.libraryId));
 
   return (
@@ -30,9 +41,7 @@ export function LibraryAccess({ book }: { book: BookRef }) {
       </p>
 
       <div role="status" className="mt-6">
-        {state?.status === "loading" ? (
-          <p className="text-ink-2">Проверяем наличие в библиотеках…</p>
-        ) : found.length > 0 ? (
+        {found.length > 0 ? (
           <ul aria-label="Найдено в библиотеках" className="flex flex-col gap-3">
             {found.map((item) => {
               const library = LIBRARIES.find((entry) => entry.id === item.libraryId);
@@ -58,11 +67,16 @@ export function LibraryAccess({ book }: { book: BookRef }) {
               );
             })}
           </ul>
-        ) : (
+        ) : loading ? null : (
           <p className="text-ink-2">
             Готовой бесплатной копии мы не нашли. Попробуйте поиск в библиотеках ниже.
           </p>
         )}
+        {loading ? (
+          <p className={found.length > 0 ? "mt-3 text-ink-2" : "text-ink-2"}>
+            Проверяем наличие в библиотеках…
+          </p>
+        ) : null}
       </div>
 
       <h3 className="mt-8 text-label text-accent">Искать эту книгу в библиотеках</h3>
