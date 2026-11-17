@@ -11,6 +11,7 @@ import { Presentation } from "@/components/presentation/presentation";
 import { Button } from "@/components/ui/button";
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
 import { cn } from "@/lib/cn";
+import { bookHref } from "@/lib/routes";
 import type { StepName } from "@/pipeline";
 
 export const metadata: Metadata = {
@@ -199,7 +200,7 @@ async function AnalysisContent({ params, searchParams }: PageProps<"/analysis/[i
 
   if (status.phase === "ready") {
     const data = await service.presentation(id);
-    if (data) return <Presentation data={data} />;
+    if (data) return <Presentation data={data} backHref={bookHref(data.book.workId)} />;
   }
   return <Progress status={status} busy={query.busy === "1"} />;
 }

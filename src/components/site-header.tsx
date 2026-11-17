@@ -3,6 +3,7 @@ import { LogoMark } from "@/components/logo-mark";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
+  { href: "/#examples", label: "Анализы" },
   { href: "/#how", label: "Как это работает" },
   { href: "/#libraries", label: "Библиотеки" },
   { href: "/#sources", label: "Источники" },

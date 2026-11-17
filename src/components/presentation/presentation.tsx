@@ -59,7 +59,13 @@ function SlideCard({
 }
 
 /** Просмотрщик презентации: слайды по одному на большом экране, лента карточек на телефоне. */
-export function Presentation({ data }: { data: PresentationData }) {
+export interface PresentationProps {
+  data: PresentationData;
+  /** Куда ведёт ссылка «← К книге» в шапке. */
+  backHref: string;
+}
+
+export function Presentation({ data, backHref }: PresentationProps) {
   const { slides } = data;
   const isDesktop = useSyncExternalStore(
     subscribeDesktop,
@@ -187,7 +193,7 @@ export function Presentation({ data }: { data: PresentationData }) {
       <div className="sticky top-0 z-20 border-b border-line bg-page/95 backdrop-blur">
         <div className="mx-auto flex max-w-page flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2 sm:px-6 lg:px-8">
           <Link
-            href={`/book/${data.book.workId}`}
+            href={backHref}
             className="-ml-2 inline-flex min-h-11 items-center px-2 text-sm text-ink-2 hover:text-ink"
           >
             ← <span className="ml-1 max-sm:sr-only">К книге</span>
@@ -337,17 +343,42 @@ export function Presentation({ data }: { data: PresentationData }) {
             Как сделан этот анализ
           </h2>
           <p className="text-ink-2">
-            {data.mode === "sources_only"
-              ? "Текста книги у нас нет. Анализ построен на открытых источниках: описаниях, рецензиях, интервью. Факты проверены по дословным выдержкам из них."
-              : "Анализ построен по тексту книги, который загрузил пользователь."}
+            {data.editorial
+              ? data.editorial.method
+              : data.mode === "sources_only"
+                ? "Текста книги у нас нет. Анализ построен на открытых источниках: описаниях, рецензиях, интервью. Факты проверены по дословным выдержкам из них."
+                : "Анализ построен по тексту книги, который загрузил пользователь."}
           </p>
           <dl className="grid grid-cols-2 gap-3 text-sm sm:grid-cols-4">
             {[
-              ["Источников", data.sources.length],
-              ["Проверено фактов", data.report.checked],
-              ["Подтверждено", data.report.supported],
-              ["Понижено до мнения AI", data.report.downgraded],
-              ["Удалено", data.report.removed + data.report.cascaded],
+              ...(data.editorial
+                ? [
+                    ["Источников", data.sources.length],
+                    [
+                      "Фактов из книги",
+                      Object.values(data.claims).filter((c) => c.type === "book_fact")
+                        .length,
+                    ],
+                    [
+                      "Внешних сведений",
+                      Object.values(data.claims).filter(
+                        (c) => c.type === "external_research",
+                      ).length,
+                    ],
+                    [
+                      "Выводов AI и критики",
+                      Object.values(data.claims).filter(
+                        (c) => c.type === "ai_interpretation" || c.type === "critique",
+                      ).length,
+                    ],
+                  ]
+                : [
+                    ["Источников", data.sources.length],
+                    ["Проверено фактов", data.report.checked],
+                    ["Подтверждено", data.report.supported],
+                    ["Понижено до мнения AI", data.report.downgraded],
+                    ["Удалено", data.report.removed + data.report.cascaded],
+                  ]),
             ].map(([label, value]) => (
               <div key={label} className="rounded-control bg-surface-2 px-3 py-2">
                 <dt className="text-label-sm text-ink-2">{label}</dt>

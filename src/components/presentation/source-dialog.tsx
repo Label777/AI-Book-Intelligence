@@ -134,7 +134,14 @@ export function SourceDialog({ data, claimId, onClose, onOpenClaim }: Props) {
                       <div>
                         <SourceLine source={source} />
                       </div>
-                      {excerpt ? (
+                      {excerpt && data.editorial ? (
+                        <p className="border-l-2 border-line-strong pl-3 text-sm wrap-anywhere text-ink-2">
+                          <span className="block text-label-sm">
+                            Что сказано в источнике (пересказ)
+                          </span>
+                          {excerpt.text}
+                        </p>
+                      ) : excerpt ? (
                         <blockquote className="border-l-2 border-line-strong pl-3 text-sm wrap-anywhere text-ink-2">
                           {excerpt.text}
                         </blockquote>
@@ -173,7 +180,11 @@ export function SourceDialog({ data, claimId, onClose, onOpenClaim }: Props) {
             </p>
           ) : null}
 
-          {VERIFICATION[claim.verification] ? (
+          {data.editorial && claim.verification === "supported" ? (
+            <p className="text-sm text-ink-2">
+              Сверено с источником при подготовке анализа.
+            </p>
+          ) : VERIFICATION[claim.verification] ? (
             <p className="text-sm text-ink-2">{VERIFICATION[claim.verification]}</p>
           ) : null}
 

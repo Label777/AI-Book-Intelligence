@@ -11,6 +11,7 @@ import {
   linkClass,
   selectedEditionTitle,
 } from "@/components/book-view";
+import { LibraryLink } from "@/components/library-link";
 import { useAsync } from "@/components/use-async";
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
 import { bookHref, type BookPageState } from "@/lib/routes";
@@ -88,6 +89,7 @@ export function BookClient() {
         <h2 id="next-title" className="font-medium text-ink">
           {selectedEditionTitle(selected)}
         </h2>
+        <LibraryLink book={book} />
         <p className="mt-2 max-w-[70ch] text-ink-2">
           В этой версии сайта можно найти книгу и выбрать издание. Создание анализа здесь
           недоступно: для него нужен сервер с доступом к AI-модели.

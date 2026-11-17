@@ -100,3 +100,58 @@ test("на телефоне нет горизонтальной прокрутк
     expect(overflow, path).toBeLessThanOrEqual(0);
   }
 });
+
+test("готовый анализ книги открывается без сервера: слайды, источники, путь к книге", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+
+  await page.goto(`${BASE}/`);
+  await page
+    .locator("#examples")
+    .getByRole("link", { name: /Лидерство/ })
+    .click();
+  await expect(page).toHaveURL(new RegExp(`${BASE}/library/kissinger-leadership/?$`));
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: "Лидерство. Шесть этюдов о мировой стратегии",
+    }),
+  ).toBeVisible();
+
+  await page.keyboard.press("End");
+  await expect(
+    page.getByRole("heading", { level: 2, name: "AI-аналитика" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Оценки — мнение AI с объяснением, а не научный рейтинг."),
+  ).toBeVisible();
+
+  const nav = page.getByRole("navigation", { name: "Слайды" });
+  await nav.getByRole("link", { name: /Разбор по главам/ }).click();
+  await expect(
+    page.getByRole("heading", { level: 2, name: "Разбор по главам" }),
+  ).toBeVisible();
+  await expect(page.getByText("6. Маргарет Тэтчер")).toBeVisible();
+
+  await page
+    .getByRole("button", { name: /Факт из книги.*открыть источник/ })
+    .first()
+    .click();
+  const dialog = page.getByRole("dialog");
+  await expect(
+    dialog.getByText("Сверено с источником при подготовке анализа."),
+  ).toBeVisible();
+  await expect(
+    dialog.getByText("Что сказано в источнике (пересказ)").first(),
+  ).toBeVisible();
+  await expect(dialog.locator("blockquote")).toHaveCount(0);
+  await page.keyboard.press("Escape");
+
+  await page.getByRole("link", { name: /К книге/ }).click();
+  await expect(page).toHaveURL(
+    new RegExp(`${BASE}/search/?\\?q=Leadership\\+Henry\\+Kissinger$`),
+  );
+  expect(errors).toEqual([]);
+});

@@ -9,6 +9,7 @@ import { normalizeQuery } from "@/books/query";
 import { CatalogError, type BookDetails } from "@/books/types";
 import { getBook, isEditionId, isWorkId } from "@/books/work";
 import { BookView, CatalogDown } from "@/components/book-view";
+import { LibraryLink } from "@/components/library-link";
 import { Button, buttonClasses } from "@/components/ui/button";
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
 import { bookHref, type BookPageState } from "@/lib/routes";
@@ -84,6 +85,7 @@ async function BookContent({ params, searchParams }: PageProps<"/book/[workId]">
             ? `Выбрано издание: ${selected.title}${selected.year ? `, ${selected.year}` : ""}`
             : "Издание не выбрано"}
         </h2>
+        <LibraryLink book={book} />
         {launchError ? (
           <p role="alert" className="mt-3 text-src-critique">
             {launchError}

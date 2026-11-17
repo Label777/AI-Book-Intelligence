@@ -131,13 +131,14 @@ test("вся главная проходится с клавиатуры", async
     });
 
   const order: (string | null | undefined)[] = [];
-  for (let step = 0; step < 8; step += 1) {
+  for (let step = 0; step < 9; step += 1) {
     await page.keyboard.press("Tab");
     order.push(await focused());
   }
   expect(order).toEqual([
     "Перейти к содержимому",
     "AI Book Intelligence",
+    "Анализы",
     "Как это работает",
     "Библиотеки",
     "Источники",
@@ -178,6 +179,10 @@ test("ссылки шапки ведут к разделам, логотип —
   await expect(
     page.getByRole("heading", { name: "Как мы работаем с источниками" }),
   ).toBeInViewport();
+
+  await page.getByRole("banner").getByRole("link", { name: "Анализы" }).click();
+  await expect(page).toHaveURL(/#examples$/);
+  await expect(page.getByRole("heading", { name: "Готовые анализы" })).toBeInViewport();
 
   await page.getByRole("link", { name: "Как это работает" }).click();
   await expect(page).toHaveURL(/#how$/);

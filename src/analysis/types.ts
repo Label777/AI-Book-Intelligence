@@ -55,4 +55,13 @@ export interface PresentationData {
   sources: Source[];
   coverage: Coverage;
   report: Report;
+  /**
+   * Анализ подготовлен вручную (Claude в чате) по открытым источникам, а не движком.
+   * Выдержки в источниках у таких анализов — пересказ, а не дословный текст.
+   */
+  editorial?: {
+    preparedAt: string;
+    /** Как готовился анализ — показывается в «Как сделан этот анализ». */
+    method: string;
+  };
 }
