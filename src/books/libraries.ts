@@ -228,7 +228,8 @@ export interface AccessDeps {
 
 async function getJson(doFetch: typeof fetch, url: string): Promise<unknown> {
   const response = await doFetch(url, {
-    signal: AbortSignal.timeout(8000),
+    // Каталог Gutendex отвечает медленно, поэтому ждём дольше обычного.
+    signal: AbortSignal.timeout(20_000),
     cache: "no-store",
   });
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -266,7 +267,7 @@ export async function findAccess(
     (async () => {
       const params = new URLSearchParams({ search: text(book) });
       return parseGutenbergAccess(
-        await getJson(doFetch, `${gutendex}/books?${params}`),
+        await getJson(doFetch, `${gutendex}/books/?${params}`),
         book,
       );
     })(),

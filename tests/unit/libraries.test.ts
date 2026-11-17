@@ -232,7 +232,7 @@ describe("findAccess", () => {
     ]);
 
     const urls = fetchMock.mock.calls.map(([url]) => new URL(url));
-    expect(urls[0].origin + urls[0].pathname).toBe("https://gutendex.com/books");
+    expect(urls[0].origin + urls[0].pathname).toBe("https://gutendex.com/books/");
     expect(urls[0].searchParams.get("search")).toBe("Pride and Prejudice Jane Austen");
     expect(urls[1].searchParams.get("q")).toBe(
       'intitle:"Pride and Prejudice" inauthor:"Jane Austen"',

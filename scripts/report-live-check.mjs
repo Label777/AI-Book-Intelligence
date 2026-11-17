@@ -26,6 +26,9 @@ console.log(
       .join(" || "),
   )}`,
 );
+if (report.responses?.length) {
+  console.log(`::notice title=Ответы библиотек::${clean(report.responses.join(" ; "))}`);
+}
 if (report.failedRequests?.length) {
   console.log(
     `::warning title=Запросы, которые не прошли::${clean(report.failedRequests.join(" ; "))}`,

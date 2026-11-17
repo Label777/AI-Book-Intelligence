@@ -17,6 +17,18 @@ test("поиск и библиотеки работают на выложенн�
     }
   });
 
+  // Ответы библиотек: статус и разрешение на запросы с других сайтов.
+  const responses: string[] = [];
+  page.on("response", (response) => {
+    const url = new URL(response.url());
+    if (/gutendex|googleapis|wikidata/.test(url.hostname)) {
+      const cors = response.headers()["access-control-allow-origin"] ?? "нет";
+      responses.push(
+        `${url.hostname}${url.pathname} → ${response.status()}, CORS: ${cors}`,
+      );
+    }
+  });
+
   try {
     await page.goto(`${SITE}/`);
     report.home = await page.getByRole("heading", { level: 1 }).innerText();
@@ -38,7 +50,7 @@ test("поиск и библиотеки работают на выложенн�
 
     const libraries = page.getByRole("region", { name: "Где читать и слушать" });
     await expect(libraries.getByText("Проверяем наличие в библиотеках…")).toBeHidden({
-      timeout: 45_000,
+      timeout: 60_000,
     });
     report.found = await libraries
       .locator("[data-found]")
@@ -58,6 +70,7 @@ test("поиск и библиотеки работают на выложенн�
     report.error = error instanceof Error ? error.message.slice(0, 600) : String(error);
   }
   report.failedRequests = failed.slice(0, 10);
+  report.responses = responses.slice(0, 10);
   writeFileSync("live-check.json", JSON.stringify(report, null, 2));
   expect(report.error).toBeUndefined();
 });
