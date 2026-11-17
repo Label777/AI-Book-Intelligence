@@ -1,0 +1,36 @@
+1:"$Sreact.fragment"
+2:"/AI-Book-Intelligence/_next/static/chunks/19p6lnnbemrpn.js"
+3:I[22016,["$2"],""]
+4:I[84953,["$2"],"ThemeToggle"]
+5:I[39756,["$2"],"default"]
+6:I[37457,["$2"],"default"]
+:HL["/AI-Book-Intelligence/_next/static/chunks/0br2x8flxzeqc.css","style"]
+9:X
+d:X
+d:C
+e:[["children",{"s":"__PAGE__","h":160,"d":{"r":"$Lf","p":"$@10","v":null,"s":"$9"}}]]
+a:[["children",{"s":"book","h":96,"d":{"r":"$Lb","p":"$@c","v":"$d","s":"$9"},"c":"$Qe"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/AI-Book-Intelligence/_next/static/chunks/0br2x8flxzeqc.css","precedence":"next"}],["$","script","script-0",{"src":"/AI-Book-Intelligence/_next/static/chunks/19p6lnnbemrpn.js","async":true}]],["$","html",null,{"lang":"ru","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"(function(){try{var t=localStorage.getItem(\"theme\");if(t===\"light\"||t===\"dark\")document.documentElement.setAttribute(\"data-theme\",t)}catch(e){}})()"}}]}],["$","body",null,{"className":"flex flex-col","children":[["$","a",null,{"href":"#main","className":"sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-3 focus-visible:left-3 focus-visible:z-50 focus-visible:rounded-control focus-visible:bg-surface focus-visible:px-4 focus-visible:py-2.5 focus-visible:text-ink","children":"Перейти к содержимому"}],["$","header",null,{"className":"border-b border-line","children":["$","div",null,{"className":"mx-auto flex h-16 max-w-page items-center justify-between gap-4 px-4 sm:px-6 lg:px-8","children":[["$","$L3",null,{"href":"/","className":"-ml-2 inline-flex min-h-11 items-center gap-2.5 rounded-control px-2 font-serif text-lg font-semibold text-ink","children":[["$","svg",null,{"viewBox":"0 0 24 24","aria-hidden":"true","className":"size-6","children":[["$","circle",null,{"cx":"6.5","cy":"6.5","r":"4.5","className":"fill-src-book"}],["$","path",null,{"d":"M17.5 1.5 22.5 6.5 17.5 11.5 12.5 6.5Z","className":"fill-src-ai"}],["$","path",null,{"d":"M6.5 13 11.5 22H1.5Z","className":"fill-src-research"}],["$","rect",null,{"x":"13.5","y":"13.5","width":"8","height":"8","className":"fill-src-critique"}]]}],"AI Book Intelligence"]}],["$","div",null,{"className":"flex items-center gap-1","children":[["$","nav",null,{"aria-label":"Разделы","className":"hidden md:block","children":["$","ul",null,{"className":"flex items-center","children":[["$","li","/#examples",{"children":["$","$L3",null,{"href":"/#examples","className":"inline-flex min-h-11 items-center rounded-control px-3 text-sm text-ink-2 transition-colors duration-150 hover:text-ink","children":"Анализы"}]}],["$","li","/#how",{"children":["$","$L3",null,{"href":"/#how","className":"inline-flex min-h-11 items-center rounded-control px-3 text-sm text-ink-2 transition-colors duration-150 hover:text-ink","children":"Как это работает"}]}],["$","li","/#libraries",{"children":["$","$L3",null,{"href":"/#libraries","className":"inline-flex min-h-11 items-center rounded-control px-3 text-sm text-ink-2 transition-colors duration-150 hover:text-ink","children":"Библиотеки"}]}],["$","li","/#sources",{"children":["$","$L3",null,{"href":"/#sources","className":"inline-flex min-h-11 items-center rounded-control px-3 text-sm text-ink-2 transition-colors duration-150 hover:text-ink","children":"Источники"}]}]]}]}],["$","$L4",null,{}]]}]]}]}],["$","main",null,{"id":"main","tabIndex":-1,"className":"flex-1 outline-none","children":["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}],"notFound":[["$","div",null,{"className":"mx-auto flex max-w-3xl flex-col items-start gap-4 px-4 py-20 sm:px-6 lg:px-8","children":[["$","p",null,{"className":"text-label text-accent","children":"404"}],["$","h1",null,{"className":"text-title","children":"Страница не найдена"}],["$","p",null,{"className":"max-w-[60ch] text-ink-2","children":"Возможно, ссылка устарела или в адресе опечатка."}],["$","$L3",null,{"href":"/","className":"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-control font-medium whitespace-nowrap transition-colors duration-150 select-none disabled:cursor-not-allowed disabled:opacity-50 bg-accent text-on-accent hover:bg-[color-mix(in_srgb,var(--accent)_88%,var(--text))] min-h-11 px-4 text-base mt-2","children":"На главную"}]]}],[]]}]}],["$","footer",null,{"className":"border-t border-line","children":["$","div",null,{"className":"mx-auto flex max-w-page flex-col gap-1 px-4 py-8 text-sm text-ink-2 sm:px-6 lg:px-8","children":[["$","p",null,{"className":"font-medium text-ink","children":"AI Book Intelligence"}],"$L7"]}]}]]}]]}]]}],"p":"$@8","v":null,"s":"$9"},"c":"$Qa"},"h":{"r":"$L11","p":"$@12","v":null,"s":"$9"}},"a":"$@13","u":"$@14","b":"RAJ2wsaAnPeejiLFbJu7s"}
+15:"$Sreact.suspense"
+16:"/AI-Book-Intelligence/_next/static/chunks/1lgd4byo0ox24.js"
+17:"/AI-Book-Intelligence/_next/static/chunks/2zcwx3as1vswu.js"
+18:I[37684,["$2","$16","$17"],"BookClient"]
+19:I[97367,["$2"],"OutletBoundary"]
+1b:"ViewportBoundary"
+1c:I[97367,["$2"],"$1b"]
+1d:"MetadataBoundary"
+1e:I[97367,["$2"],"$1d"]
+1f:I[27201,["$2"],"IconMark"]
+7:["$","p",null,{"className":"max-w-[70ch]","children":"Анализ создаёт искусственный интеллект. Он помогает разобраться в книге, но не заменяет её чтение."}]
+b:["$","$1","c",{"children":[null,["$","$L5",null,{"parallelRouterKey":"children","template":["$","$L6",null,{}]}]]}]
+f:["$","$1","c",{"children":[["$","div",null,{"className":"mx-auto max-w-4xl px-4 py-10 sm:px-6 md:py-14 lg:px-8","children":["$","$15",null,{"fallback":null,"children":["$","$L18",null,{}]}]}],[["$","script","script-0",{"src":"/AI-Book-Intelligence/_next/static/chunks/1lgd4byo0ox24.js","async":true}],["$","script","script-1",{"src":"/AI-Book-Intelligence/_next/static/chunks/2zcwx3as1vswu.js","async":true}]],["$","$L19",null,{"children":["$","$15",null,{"name":"Next.MetadataOutlet","children":"$@1a"}]}]]}]
+11:["$","$1","h",{"children":[null,["$","$L1c",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#0d0e12"}]]}],["$","$L1e",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$15",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Подтверждение книги · AI Book Intelligence"}],["$","meta","1",{"name":"description","content":"Введите название книги и автора — AI разберёт идеи, покажет слабые места, свяжет книгу с другими и предложит план действий. У каждого утверждения видно, откуда оно взято."}],["$","meta","2",{"name":"robots","content":"noindex"}],["$","link","3",{"rel":"icon","href":"/AI-Book-Intelligence/icon.svg?icon.0yzd9ts2fsipl.svg","sizes":"any","type":"image/svg+xml"}],["$","$L1f","4",{}]]}]}],null]}],null]}]
+1a:null
+14:true
+9:300
+9:C
+13:0
+c:"$undefined"
+12:"$undefined"
+10:"$undefined"
+8:"$undefined"
